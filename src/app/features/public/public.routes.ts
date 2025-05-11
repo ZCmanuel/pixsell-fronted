@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { PublicLayoutComponent } from '../layouts/public-layout/public-layout.component';
-import { HomeComponent } from './home/home.component';
-import { GalleryComponent } from './gallery/gallery.component';
-import { ContactComponent } from './contact/contact.component';
-import { AbautAsComponent } from './abaut-as/abaut-as.component';
+import { HomeComponent } from './pages/home/home.component';
+import { GalleryComponent } from './pages/gallery/gallery.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { AbautAsComponent } from './pages/abaut-as/abaut-as.component';
 
 export const PUBLIC_ROUTES: Routes = [
   {
