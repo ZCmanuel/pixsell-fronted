@@ -1,0 +1,63 @@
+<footer class="bg-[#898787] text-white px-6 py-10">
+  <div
+    class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 items-start"
+  >
+    <!-- Logo -->
+    <div class="flex justify-center md:justify-start">
+      <img
+        src="img/logo.png"
+        routerLink="home"
+        alt="Logo"
+        class="h-16 object-contain"
+      />
+    </div>
+
+    <!-- Enlaces rápidos -->
+    <div>
+      <h3 class="text-lg font-bold mb-4 font-poppins">Enlaces Rápidos</h3>
+      <nav class="flex flex-col gap-2 font-roboto text-sm">
+        @for (route of footerRoutes; track route.path) {
+        <a
+          [routerLink]="route.path"
+          class="hover:underline hover:text-white transition"
+        >
+          {{ route.title }}
+        </a>
+        }
+      </nav>
+    </div>
+
+    <!-- Páginas legales -->
+    <div>
+      <h3 class="text-lg font-bold mb-4 font-poppins">Páginas Legales</h3>
+      <ul class="flex flex-col gap-2 font-roboto text-sm">
+        <li>
+          <a class="hover:underline hover:text-white">Aviso Legal</a>
+        </li>
+        <li>
+          <a class="hover:underline hover:text-white">Términos y Condiciones</a>
+        </li>
+        <li>
+          <a class="hover:underline hover:text-white">Política de Privacidad</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contacto -->
+    <div>
+      <h3 class="text-lg font-bold mb-4 font-poppins">Contáctanos</h3>
+      <ul class="space-y-1 font-roboto text-sm">
+        <li>Soporte: {{ "soporte@pixsell.com" }}</li>
+        <li>Teléfono: +34 123 456 789</li>
+        <li>Horario: Lunes a Viernes - 09:00 a 18:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div
+    class="mt-10 border-t border-white pt-4 text-center text-sm text-white font-roboto"
+  >
+    © 2025 PixSell™. Todos los derechos reservados.
+  </div>
+</footer>
