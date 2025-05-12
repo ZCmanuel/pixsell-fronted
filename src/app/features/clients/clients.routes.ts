@@ -16,7 +16,7 @@ export const CLIENT_ROUTES: Routes = [
         component: DashboardComponent,
         title: 'Inicio',
         data: {
-          icon: 'home',
+          icon: 'inicio',
           visible: true,
           order: 1,
         },
@@ -26,7 +26,7 @@ export const CLIENT_ROUTES: Routes = [
         component: AlbumsComponent,
         title: 'Mis Álbumes',
         data: {
-          icon: 'image',
+          icon: 'carpeta',
           visible: true,
           order: 2,
         },
@@ -44,9 +44,7 @@ export const CLIENT_ROUTES: Routes = [
         component: SettingsComponent,
         title: 'Configuración',
         data: {
-          icon: 'settings',
-          visible: true,
-          order: 3,
+          visible: false,
         },
       },
       {
@@ -54,9 +52,7 @@ export const CLIENT_ROUTES: Routes = [
         component: ProfileComponent,
         title: 'Mi perfil',
         data: {
-          icon: 'person',
-          visible: true,
-          order: 4,
+          visible: false,
         },
       },
       {

@@ -18,7 +18,7 @@ export const ADMIN_ROUTES: Routes = [
         component: DashboardComponent,
         title: 'Inicio',
         data: {
-          icon: 'home',
+          icon: 'inicio',
           visible: true,
           order: 1,
         },
@@ -29,7 +29,7 @@ export const ADMIN_ROUTES: Routes = [
         component: UsersComponent,
         title: 'Usuarios',
         data: {
-          icon: 'users',
+          icon: 'usuarios',
           visible: true,
           order: 2,
         },
@@ -49,7 +49,7 @@ export const ADMIN_ROUTES: Routes = [
         component: AlbumsComponent,
         title: 'Álbumes',
         data: {
-          icon: 'image',
+          icon: 'carpeta',
           visible: true,
           order: 3,
         },
@@ -68,9 +68,7 @@ export const ADMIN_ROUTES: Routes = [
         component: ProfileComponent,
         title: 'Mi perfil',
         data: {
-          icon: 'person',
-          visible: true,
-          order: 4,
+          visible: false,
         },
       },
 
@@ -79,9 +77,7 @@ export const ADMIN_ROUTES: Routes = [
         component: SettingsComponent,
         title: 'Configuración',
         data: {
-          icon: 'settings',
-          visible: true,
-          order: 5,
+          visible: false,
         },
       },
 

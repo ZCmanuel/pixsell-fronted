@@ -1,11 +1,18 @@
-<header>
-  <h1>header layout</h1>
-</header>
+<div class="relative h-screen overflow-hidden">
+  <!-- Sidebar fijo a la izquierda -->
+  <div class="fixed top-0 left-0 w-1/8 h-full z-30">
+    <sidebar />
+  </div>
 
-<main>
-  <router-outlet/>
-</main>
+  <!-- Header fijo en la parte superior, desplazado a la derecha del sidebar -->
+  <div class="fixed top-0 left-[12.5%] w-[87.5%] h-[72px] z-20">
+    <head-component />
+  </div>
 
-<footer>
-  <h1>Footer layout</h1>
-</footer>
+  <!-- Contenido principal -->
+  <div class="absolute top-[72px] left-[12.5%] w-[87.5%] h-[calc(100%-72px)] overflow-y-auto bg-gray-100 p-4">
+    <main class="h-full">
+      <router-outlet />
+    </main>
+  </div>
+</div>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { PUBLIC_ROUTES } from '../../../features/public/public.routes';
-import { PrimaryLinkComponent } from "../primary-link/primary-link.component";
-import { SecondaryLinkComponent } from "../secondary-link/secondary-link.component";
+import { PrimaryLinkComponent } from '../../button-links/primary-link/primary-link.component';
+import { SecondaryLinkComponent } from '../../button-links/secondary-link/secondary-link.component';
+import { PUBLIC_ROUTES } from '../../../../features/public/public.routes';
+
 
 @Component({
   selector: 'navbar',
