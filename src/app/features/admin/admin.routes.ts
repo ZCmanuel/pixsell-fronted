@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersLayoutComponent } from '../layouts/users-layout/users-layout.component';
-import { UsersComponent } from './pages/users/users.component';
-import { UsersDetailsComponent } from './pages/users-details/users-details.component';
-import { AlbumsComponent } from '../clients/pages/albums/albums.component';
-import { AlbumDetailsComponent } from '../clients/pages/album-details/album-details.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
 
-export const ADMIN_ROUTES: Routes = [
+export default [
   {
     path: '',
-    component: UsersLayoutComponent,
+    component: AdminLayoutComponent,
     children: [
       {
         path: 'inicio',
-        component: DashboardComponent,
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
         title: 'Inicio',
         data: {
-          icon: 'home',
+          icon: 'inicio',
           visible: true,
           order: 1,
         },
@@ -26,10 +20,10 @@ export const ADMIN_ROUTES: Routes = [
 
       {
         path: 'usuarios',
-        component: UsersComponent,
+        loadComponent: () => import('./pages/users/users.component').then((c) => c.UsersComponent),
         title: 'Usuarios',
         data: {
-          icon: 'users',
+          icon: 'usuarios',
           visible: true,
           order: 2,
         },
@@ -37,7 +31,7 @@ export const ADMIN_ROUTES: Routes = [
 
       {
         path: 'usuarios/:id',
-        component: UsersDetailsComponent,
+        loadComponent: () => import('./pages/users-details/users-details.component').then((c) => c.UsersDetailsComponent),
         title: 'Detalles usuario',
         data: {
           visible: false, // No aparece en menús
@@ -46,17 +40,17 @@ export const ADMIN_ROUTES: Routes = [
 
       {
         path: 'albums',
-        component: AlbumsComponent,
+        loadComponent: () => import('../clients/pages/albums/albums.component').then((c) => c.AlbumsComponent),
         title: 'Álbumes',
         data: {
-          icon: 'image',
+          icon: 'carpeta',
           visible: true,
           order: 3,
         },
       },
       {
         path: 'albums/:id',
-        component: AlbumDetailsComponent,
+        loadComponent: () => import('../clients/pages/album-details/album-details.component').then((c) => c.AlbumDetailsComponent),
         title: 'Detalles álbum',
         data: {
           visible: false, // No aparece en menús
@@ -65,23 +59,19 @@ export const ADMIN_ROUTES: Routes = [
 
       {
         path: 'perfil',
-        component: ProfileComponent,
+        loadComponent: () => import('./pages/profile/profile.component').then((c) => c.ProfileComponent),
         title: 'Mi perfil',
         data: {
-          icon: 'person',
-          visible: true,
-          order: 4,
+          visible: false,
         },
       },
 
       {
         path: 'configuracion',
-        component: SettingsComponent,
+        loadComponent: () => import('./pages/settings/settings.component').then((c) => c.SettingsComponent),
         title: 'Configuración',
         data: {
-          icon: 'settings',
-          visible: true,
-          order: 5,
+          visible: false,
         },
       },
 
@@ -91,4 +81,4 @@ export const ADMIN_ROUTES: Routes = [
       },
     ],
   },
-];
+] as Routes;

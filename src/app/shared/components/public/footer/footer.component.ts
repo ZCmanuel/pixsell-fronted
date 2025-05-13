@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PUBLIC_ROUTES } from '../../../features/public/public.routes';
+import footerRoutes from '../../../../features/public/public.routes'; // Import the public routes
+
 
 @Component({
   selector: 'footer-component',
@@ -8,7 +9,7 @@ import { PUBLIC_ROUTES } from '../../../features/public/public.routes';
   templateUrl: './footer.component.html',
 })
 export class FooterComponent {
-  footerRoutes = (PUBLIC_ROUTES[0]?.children || []).filter(
+  footerRoutes = (footerRoutes[0]?.children || []).filter(
     (route) => route.path && route.data?.['label']
   );
 }
