@@ -1,84 +1,78 @@
 import { Routes } from '@angular/router';
-import { UsersLayoutComponent } from '../layouts/users-layout/users-layout.component';
 import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
 
-export default [
+const adminRoutes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
     children: [
       {
         path: 'inicio',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then((c) => c.DashboardComponent),
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
         title: 'Inicio',
-        data: {
-          icon: 'inicio',
-          visible: true,
-          order: 1,
-        },
+        data: { icon: 'inicio', visible: true, order: 1 },
       },
-
       {
         path: 'usuarios',
-        loadComponent: () => import('./pages/users/users.component').then((c) => c.UsersComponent),
+        loadComponent: () =>
+          import('./pages/users/users.component').then((m) => m.UsersComponent),
         title: 'Usuarios',
-        data: {
-          icon: 'usuarios',
-          visible: true,
-          order: 2,
-        },
+        data: { icon: 'usuarios', visible: true, order: 2 },
       },
-
       {
         path: 'usuarios/:id',
-        loadComponent: () => import('./pages/users-details/users-details.component').then((c) => c.UsersDetailsComponent),
+        loadComponent: () =>
+          import('./pages/users-details/users-details.component').then(
+            (m) => m.UsersDetailsComponent
+          ),
         title: 'Detalles usuario',
-        data: {
-          visible: false, // No aparece en menús
-        },
+        data: { visible: false },
       },
-
       {
         path: 'albums',
-        loadComponent: () => import('../clients/pages/albums/albums.component').then((c) => c.AlbumsComponent),
+        loadComponent: () =>
+          import('./pages/albums/albums.component').then(
+            (m) => m.AlbumsComponent
+          ),
         title: 'Álbumes',
-        data: {
-          icon: 'carpeta',
-          visible: true,
-          order: 3,
-        },
+        data: { icon: 'carpeta', visible: true, order: 3 },
       },
       {
         path: 'albums/:id',
-        loadComponent: () => import('../clients/pages/album-details/album-details.component').then((c) => c.AlbumDetailsComponent),
+        loadComponent: () =>
+          import('./pages/albums-details/albums-details.component').then(
+            (m) => m.AlbumsDetailsComponent
+          ),
         title: 'Detalles álbum',
-        data: {
-          visible: false, // No aparece en menús
-        },
+        data: { visible: false },
       },
-
       {
         path: 'perfil',
-        loadComponent: () => import('./pages/profile/profile.component').then((c) => c.ProfileComponent),
+        loadComponent: () =>
+          import('../../shared/pages/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          ),
         title: 'Mi perfil',
-        data: {
-          visible: false,
-        },
+        data: { visible: false },
       },
-
       {
         path: 'configuracion',
-        loadComponent: () => import('./pages/settings/settings.component').then((c) => c.SettingsComponent),
+        loadComponent: () =>
+          import('../../shared/pages/settings/settings.component').then(
+            (m) => m.SettingsComponent
+          ),
         title: 'Configuración',
-        data: {
-          visible: false,
-        },
+        data: { visible: false },
       },
-
       {
         path: '**',
         redirectTo: 'inicio',
       },
     ],
   },
-] as Routes;
+];
+
+export default adminRoutes;

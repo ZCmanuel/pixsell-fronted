@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () =>
-      import('./features/admin/admin.routes').then((m) => m.default),
+      import('./features/admin/admin.routes'),
   },
   {
     path: 'auth',
