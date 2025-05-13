@@ -1,19 +1,18 @@
 import { Routes } from '@angular/router';
 import { UsersLayoutComponent } from '../layouts/users-layout/users-layout.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AlbumsComponent } from './pages/albums/albums.component';
-import { AlbumDetailsComponent } from './pages/album-details/album-details.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 
-export const CLIENT_ROUTES: Routes = [
+
+export default[
   {
     path: '',
     component: UsersLayoutComponent,
     children: [
       {
         path: 'inicio',
-        component: DashboardComponent,
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(
+            (c) => c.DashboardComponent
+          ),
         title: 'Inicio',
         data: {
           icon: 'inicio',
@@ -23,7 +22,10 @@ export const CLIENT_ROUTES: Routes = [
       },
       {
         path: 'albums',
-        component: AlbumsComponent,
+        loadComponent: () =>
+          import('./pages/albums/albums.component').then(
+            (c) => c.AlbumsComponent
+          ),
         title: 'Mis Álbumes',
         data: {
           icon: 'carpeta',
@@ -33,7 +35,10 @@ export const CLIENT_ROUTES: Routes = [
       },
       {
         path: 'albums/:id',
-        component: AlbumDetailsComponent,
+        loadComponent: () =>
+          import('./pages/album-details/album-details.component').then(
+            (c) => c.AlbumDetailsComponent
+          ),
         title: 'Detalles album',
         data: {
           visible: false, // No aparece en menús
@@ -41,7 +46,10 @@ export const CLIENT_ROUTES: Routes = [
       },
       {
         path: 'configuracion',
-        component: SettingsComponent,
+        loadComponent: () =>
+          import('./pages/settings/settings.component').then(
+            (c) => c.SettingsComponent
+          ),
         title: 'Configuración',
         data: {
           visible: false,
@@ -49,7 +57,10 @@ export const CLIENT_ROUTES: Routes = [
       },
       {
         path: 'perfil',
-        component: ProfileComponent,
+        loadComponent: () =>
+          import('./pages/profile/profile.component').then(
+            (c) => c.ProfileComponent
+          ),
         title: 'Mi perfil',
         data: {
           visible: false,
@@ -61,4 +72,4 @@ export const CLIENT_ROUTES: Routes = [
       },
     ],
   },
-];
+] as Routes;
