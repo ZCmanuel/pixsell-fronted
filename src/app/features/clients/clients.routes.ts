@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
 import { UsersLayoutComponent } from '../layouts/users-layout/users-layout.component';
 
-
-export default[
+const clientRoutes: Routes = [
   {
     path: '',
     component: UsersLayoutComponent,
@@ -39,16 +38,16 @@ export default[
           import('./pages/album-details/album-details.component').then(
             (c) => c.AlbumDetailsComponent
           ),
-        title: 'Detalles album',
+        title: 'Detalles álbum',
         data: {
-          visible: false, // No aparece en menús
+          visible: false,
         },
       },
       {
         path: 'configuracion',
         loadComponent: () =>
-          import('./pages/settings/settings.component').then(
-            (c) => c.SettingsComponent
+          import('../../shared/pages/settings/settings.component').then(
+            (m) => m.SettingsComponent
           ),
         title: 'Configuración',
         data: {
@@ -58,8 +57,8 @@ export default[
       {
         path: 'perfil',
         loadComponent: () =>
-          import('./pages/profile/profile.component').then(
-            (c) => c.ProfileComponent
+          import('../../shared/pages/profile/profile.component').then(
+            (m) => m.ProfileComponent
           ),
         title: 'Mi perfil',
         data: {
@@ -69,7 +68,10 @@ export default[
       {
         path: '**',
         redirectTo: 'inicio',
+        pathMatch: 'full',
       },
     ],
   },
-] as Routes;
+];
+
+export default clientRoutes;
