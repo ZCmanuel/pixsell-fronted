@@ -1,54 +1,71 @@
-<div class="flex flex-col justify-between w-full p-2 bg-[#D1D0D0] h-screen">
-  <!-- Pimer div -->
-  <div class="">
-    <div class="p-4">
-      <img src="img/logo.png" [routerLink]="['/' + basePath + '/inicio']" class="w-[90%]" />
+<div
+  class="flex flex-col justify-between w-full p-4 bg-[#D1D0D0] shadow-xl h-screen"
+>
+  <!-- Primer bloque (Logo + navegación) -->
+  <div>
+    <div class="mb-4 pb-4">
+      <img
+        src="img/logo.png"
+        [routerLink]="['/' + basePath + '/inicio']"
+        class="w-[80%] mx-auto cursor-pointer"
+        alt="Logo"
+      />
     </div>
-    <div class="flex flex-col gap-2">
+
+    <nav class="flex flex-col gap-2">
       @for (route of routes; track route.path) {
       <div
-        class="flex flex-row items-center p-4 gap-4 hover:bg-[#f5f5f5] rounded-lg transition-colors duration-200"
-        routerLinkActive="bg-[#ebebeb]"
+        class="flex items-center justify-between p-4 rounded-md transition-colors duration-200 group hover:bg-[#f0f0f0]"
+        routerLink="{{ route.path }}"
+        routerLinkActive="bg-[#f0f0f0]"
       >
-        <img
-          src="icons/{{ route.data?.['icon'] }}.png"
-          alt=""
-          class="w-[14%]"
-        />
-        <a
-          routerLink="{{ route.path }}"
-          class="text-[16px] font-semibold text-[#333] hover:text-[#000] transition-colors duration-200"
-        >
-          {{ route.title }}
-        </a>
+        <!-- Ícono + Título -->
+        <div class="flex items-center gap-3">
+          <img
+            src="icons/{{ route.data?.['icon'] }}.png"
+            alt="icono"
+            class="w-5 h-5"
+          />
+          <a
+            routerLink="{{ route.path }}"
+            class="text-sm font-bold text-[#333] group-hover:text-[#000] transition-colors duration-200"
+          >
+            {{ route.title }}
+          </a>
+        </div>
       </div>
       }
-    </div>
+    </nav>
   </div>
 
-  <!-- Segundo div -->
+  <!-- Segundo bloque (configuración y logout) -->
   <div class="flex flex-col gap-2 border-t border-[#bbb] pt-4 mt-4">
+    <!-- Configuración -->
     <div
-      class="flex flex-row items-center p-4 gap-4 hover:bg-[#f5f5f5] rounded-lg transition-colors duration-200"
-      routerLinkActive="bg-[#ebebeb]"
+      class="flex items-center p-3 gap-3 hover:bg-blue-200 rounded-md transition-colors duration-200 group"
+      [routerLink]="['/' + basePath + '/configuracion']"
+      routerLinkActive="bg-[#d9ecff]"
     >
-      <img src="icons/configuracion.png" alt="" class="w-[14%]" />
-
+      <img
+        src="icons/configuracion.png"
+        alt="config"
+        class="w-[18px] h-[18px]"
+      />
       <a
-        [routerLink]="['/' + basePath + '/configuracion']"
-        class="text-[16px] font-semibold text-[#333] hover:text-[#000] transition-colors duration-200"
+        class="text-sm font-semibold text-[#4294FF] group-hover:text-[#2f79d1] transition-colors duration-200"
       >
-        configuracion
+        Configuración
       </a>
     </div>
 
+    <!-- Logout -->
     <div
-      class="flex flex-row items-center p-4 gap-4 hover:bg-[#f5f5f5] rounded-lg transition-colors duration-200"
+      class="flex items-center p-3 gap-3 hover:bg-red-200 bg-red-100 rounded-md transition-colors duration-200 group"
+      (click)="logout()"
     >
-      <img src="icons/logout.png" class="w-[14%]" />
+      <img src="icons/logout.png" alt="logout" class="w-[18px] h-[18px]" />
       <button
-        (click)="logout()"
-        class="text-[16px] font-semibold text-[#333] hover:text-[#000] transition-colors duration-200"
+        class="text-sm font-semibold text-red-500 group-hover:text-red-600 transition-colors duration-200"
       >
         Cerrar sesión
       </button>
