@@ -1,1 +1,66 @@
-<p>login works!</p>,
+<div
+  class="flex flex-col justify-center gap-6 bg-[#D1D0D0] p-10 shadow-xl rounded-md"
+>
+  <div class="flex justify-center p-4">
+    <img src="img/logo.png" class="w-[80%]" routerLink="" />
+  </div>
+  <div class="font-semibold text-center text-2xl underline underline-offset-10">
+    <h1>Iniciar Sesión</h1>
+  </div>
+
+  <form
+    class="w-full flex flex-col items-center gap-4 py-4"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="loginForm"
+  >
+    <!-- Email -->
+    <div>
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="Correo electrónico"
+        class="px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      <div
+        *ngIf="email?.touched && email?.invalid"
+        class="text-red-500 text-sm mt-1"
+      >
+        <div *ngIf="email?.errors?.['required']">El correo es obligatorio.</div>
+        <div *ngIf="email?.errors?.['email']">Formato de correo no válido.</div>
+      </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div>
+      <input
+        formControlName="contraseña"
+        type="password"
+        placeholder="Contraseña"
+        class="px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      <div
+        *ngIf="contrasena?.touched && contrasena?.invalid"
+        class="text-red-500 text-sm mt-1"
+      >
+        <div *ngIf="contrasena?.errors?.['required']">
+          La contraseña es obligatoria.
+        </div>
+        <div *ngIf="contrasena?.errors?.['minlength']">
+          Mínimo 4 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <div class="w-[80%] flex justify-center py-4">
+      <primary-button label="Iniciar sesión" />
+    </div>
+
+    <!-- Error general -->
+    <div *ngIf="errorMessage" class="text-red-600 text-center text-sm p-4 bg-red-100 rounded-md">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </form>
+</div>
