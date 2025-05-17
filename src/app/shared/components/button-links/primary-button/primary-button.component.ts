@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-primary-button',
+  selector: 'primary-button',
   imports: [],
   templateUrl: './primary-button.component.html',
 })

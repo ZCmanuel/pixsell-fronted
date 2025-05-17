@@ -1,5 +1,6 @@
 import { Component, computed, inject, Input } from '@angular/core';
 import { Route, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../../core/services/Auth.service';
 
 @Component({
   selector: 'sidebar',
@@ -13,8 +14,10 @@ export class SidebarComponent {
   // ruta actual /admin o /user
   @Input() basePath: string = '';
 
+  private authService = inject(AuthService);
+
   // Boton de cerrar sesión
   logout(): void {
-    console.log('Cerrar sesión');
+    this.authService.logout();
   }
 }
