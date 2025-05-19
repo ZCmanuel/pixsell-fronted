@@ -18,6 +18,7 @@ export class SidebarComponent {
 
   // Boton de cerrar sesión
   logout(): void {
+    console.log('Logout');
     this.authService.logout();
   }
 }

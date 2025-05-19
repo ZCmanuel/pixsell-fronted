@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { UsersLayoutComponent } from '../layouts/users-layout/users-layout.component';
+import { IsAuthenticatedGuard } from '../../core/guards/is-autenticated.guard';
 
 const clientRoutes: Routes = [
   {
     path: '',
+    canMatch: [IsAuthenticatedGuard],
     component: UsersLayoutComponent,
     children: [
       {

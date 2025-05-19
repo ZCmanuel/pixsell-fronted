@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, computed, inject, Input } from '@angular/core';
 import { SecondaryLinkComponent } from '../../button-links/secondary-link/secondary-link.component';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/services/Auth.service';
@@ -13,7 +13,7 @@ export class HeaderComponent {
   @Input() basePath: string = '';
 
   private authService = inject(AuthService);
-  readonly user = this.authService.getUser(); // Obtenemos el usuario actual
+  user = computed(() => this.authService.user()); 
 
   // Obtenemos el path de la ruta actual dinamicamente
   get currentPath(): string {
