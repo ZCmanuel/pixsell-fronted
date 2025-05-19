@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
+import { IsAuthenticatedGuard } from '../../core/guards/is-autenticated.guard';
+import { IsAdminGuard } from '../../core/guards/is-admin.guard';
 
 const adminRoutes: Routes = [
   {
     path: '',
+    canMatch: [IsAuthenticatedGuard, IsAdminGuard],
     component: AdminLayoutComponent,
     children: [
       {

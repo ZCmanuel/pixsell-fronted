@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
+import { IsNotAuthenticatedGuard } from './core/guards/not-autenticated.guard';
 
 export const routes: Routes = [
   {
     path: 'admin',
-    loadChildren: () =>
-      import('./features/admin/admin.routes'),
+    loadChildren: () => import('./features/admin/admin.routes'),
   },
   {
     path: 'auth',

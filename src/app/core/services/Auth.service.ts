@@ -1,9 +1,13 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { User, UserClass } from '../interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { firstValueFrom, tap } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { catchError, map, Observable, of } from 'rxjs';
+import { UserResponse } from '../interfaces/auth-responser.interface';
+
+type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 
 @Injectable({
   providedIn: 'root',
@@ -11,120 +15,97 @@ import { firstValueFrom, tap } from 'rxjs';
 export class AuthService {
   // URL de la API -> http://localhost:8000/api
   private readonly API_URL = environment.apiUrl;
-
   private http = inject(HttpClient);
-  private readonly TOKEN_KEY = 'token';
   private route = inject(Router);
 
-  private user: User | null = null; // Completo User {user: UserClass, message: string}
+  // Siganals
+  private _authStatus = signal<AuthStatus>('checking');
+  private _user = signal<UserClass | null>(null);
+  private _token = signal<string | null>(localStorage.getItem('token'));
+
+  // Computed
+  user = computed(() => this._user()); // Usuario autenticado
+  isAdmin = computed(() => this._user()?.rol.includes('fotógrafo') ?? null); // Si el usuario es fotógrafo
+
+  checkStatusResource = rxResource({
+    loader: () => this.checkStatus(),
+  });
 
   /**
-   * REGISTRO DE USUARIO
-   * /register -> POST
-   * user -> datos del usuario a guardar
-   *
-   * @param user
-   * @returns
+   * ESTADOS DE AUTENTICACION
    */
-  register(user: Partial<UserClass>) {
-    return this.http.post(`${this.API_URL}/register`, user);
+  authStatus = computed<AuthStatus>(() => {
+    if (this._authStatus() === 'checking') return 'checking';
+
+    if (this._user()) {
+      return 'authenticated';
+    }
+
+    return 'not-authenticated';
+  });
+
+  login(user: Partial<UserClass>): Observable<boolean> {
+    return this.http.post<UserResponse>(`${this.API_URL}/login`, user).pipe(
+      map((resp) => this.handleAuthSuccess(resp)),
+      catchError((err) => this.handleAuthError(err))
+    );
   }
 
-  /**
-   * LOGIN DE USUARIO
-   * /login -> POST
-   * user -> datos del usuario a guardar
-   *
-   * @param user
-   * @returns
-   */
-  login(user: Partial<UserClass>) {
-    return this.http
-      .post<{ token: string }>(`${this.API_URL}/login`, user)
-      .pipe(
-        tap((res) => {
-          console.log('Guardando token en el localStorage');
-          localStorage.setItem(this.TOKEN_KEY, res.token); // Guardamos el token en el localStorage
-        }),
-        tap(() => {
-          this.fetchUser().then(() => this.redirectByRole()); // Obtenemos el usuario y redirigimos según su rol
-        })
-      );
+  checkStatus(): Observable<boolean> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this._authStatus.set('not-authenticated');
+      return of(false);
+    }
+
+    return this.http.get<User>(`${this.API_URL}/me`).pipe(
+      map((resp) => this.handleAuthRefresh(resp.user)),
+      catchError((err) => this.handleAuthError(err))
+    );
   }
 
-  /**
-   * OBTENER TOKEN
-   * user -> usuario logueado
-   * @returns
-   */
-  getUser(): UserClass | null {
-    console.log('getUser: ', this.user?.user);
-    return this.user?.user || null; // Si el usuario es null, devolvemos null
-  }
-
-  /**
-   * CERRAMOS SESIÓN
-   * /logout -> POST
-   * Invalidamos el token en el backend
-   * Limpiamos el token del localStorage
-   * Limpiamos el usuario
-   * Redirigimos al usuario a la página de login
-   * @returns
-   */
   logout() {
-    this.http.post(`${this.API_URL}/logout`, {}).subscribe();
-    localStorage.removeItem(this.TOKEN_KEY);
-    this.user = null;
-    this.route.navigate(['/auth/login']);
+    this._user.set(null);
+    this._authStatus.set('not-authenticated');
+    this._token.set(null);
+    localStorage.removeItem('token');
+    this.route.navigateByUrl('/auth');
   }
 
-  /**
-   * OBTENER USUARIO
-   * /me -> GET
-   * user -> usuario logueado
-   * Obtenemos el usuario logueado
-   * Guardamos el usuario en la variable user
-   * Si no se obtiene el usuario, redirigimos al login
-   * @returns
-   */
-  async fetchUser(): Promise<void> {
-    try {
-      const userResponse = await firstValueFrom(
-        this.http.get<User>(`${this.API_URL}/me`)
-      );
-      this.user = userResponse;
-    } catch {
-      this.user = null;
-      this.logout();
-    }
+  handleAuthSuccess({ user, token }: UserResponse) {
+    setTimeout(() => {}, 20000);
+
+    this._user.set(user);
+    this._authStatus.set('authenticated');
+    this._token.set(token);
+    this.redirectByRole();
+
+    localStorage.setItem('token', token);
+    return true;
   }
 
-  isAuthenticated(): boolean {
-    // Si el token existe, el usuario está autenticado
-    const token = localStorage.getItem(this.TOKEN_KEY);
-    return !!token;
+  handleAuthRefresh(user: UserClass) {
+    setTimeout(() => {}, 20000);
+
+    this._user.set(user);
+    this._authStatus.set('authenticated');
+    this.redirectByRole();
+
+    return true;
   }
 
-  /**
-   * REDIRECCIONAR AL USUARIO SEGÚN SU ROL
-   * Si el rol es admin, redirigimos a /admin
-   * Si el rol es user, redirigimos a /user
-   * Si el user es null, redirigimos a /auth/login
-   * @returns
-   */
-  private redirectByRole(): void {
-    // Si user es null, no redirigimos
-    if (!this.user) {
-      this.route.navigate(['/auth/login']);
-      return;
-    }
+  handleAuthError(err: any) {
+    console.error('handleAuthError', err);
+    this.logout();
+    // Pausa el error para ver si falla
+    return of(false);
+  }
 
-    // Si el rol es admin, redirigimos a /admin
-    if (this.user.user.rol === 'fotógrafo') {
-      this.route.navigate(['/admin']);
+  redirectByRole() {
+    if (this.isAdmin()) {
+      this.route.navigateByUrl('/admin');
     } else {
-      // Si el rol es user, redirigimos a /user
-      this.route.navigate(['/user']);
+      this.route.navigateByUrl('/user');
     }
   }
 }
