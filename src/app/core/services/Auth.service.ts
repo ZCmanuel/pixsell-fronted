@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { catchError, map, Observable, of } from 'rxjs';
 import { UserResponse } from '../interfaces/auth-responser.interface';
+import { UserRegister } from '../interfaces/user-register.interface';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 
@@ -49,6 +50,10 @@ export class AuthService {
       map((resp) => this.handleAuthSuccess(resp)),
       catchError((err) => this.handleAuthError(err))
     );
+  }
+
+  register(user: Partial<UserRegister>): Observable<any> {
+    return this.http.post(`${this.API_URL}/register`, user)
   }
 
   checkStatus(): Observable<boolean> {

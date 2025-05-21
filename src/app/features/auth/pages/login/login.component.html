@@ -9,7 +9,7 @@
   </div>
 
   <form
-    class="w-full flex flex-col items-center gap-4 py-4"
+    class="w-full flex flex-col items-center gap-4 py-2"
     (ngSubmit)="onSubmit()"
     [formGroup]="loginForm"
   >
@@ -54,12 +54,25 @@
     </div>
 
     <!-- Botón -->
-    <div class="w-[80%] flex justify-center py-4">
+    <div class="w-[80%] flex justify-center py-2">
       <primary-button label="Iniciar sesión" />
     </div>
 
+    <div class="text-center text-sm">
+      ¿No tienes cuenta?
+      <a
+        routerLink="/auth/register"
+        class="text-blue-600 hover:underline hover:text-blue-800 transition duration-200"
+      >
+        Regístrate
+      </a>
+    </div>
+
     <!-- Error general -->
-    <div *ngIf="errorMessage" class="text-red-600 text-center text-sm p-4 bg-red-100 rounded-md">
+    <div
+      *ngIf="errorMessage"
+      class="text-red-600 text-center text-sm p-4 bg-red-100 rounded-md"
+    >
       <p>{{ errorMessage }}</p>
     </div>
   </form>
