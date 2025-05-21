@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryButtonComponent } from '../../../../shared/components/button-links/primary-button/primary-button.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/services/Auth.service';
-import { User, UserClass } from '../../../../core/interfaces/user.interface';
+import { UserClass } from '../../../../core/interfaces/user.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  private router = inject(Router);
   private user: Partial<UserClass> | null = null;
   errorMessage: string = '';
 
