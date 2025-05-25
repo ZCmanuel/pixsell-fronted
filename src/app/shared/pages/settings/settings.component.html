@@ -1,3 +1,69 @@
-<div>
-    <div>Ajustes del usuario compratido</div>
+<div class="flex flex-col items-center justify-center min-h-screen">
+  <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 space-y-8">
+    
+    <!-- Título principal -->
+    <h1 class="text-3xl font-bold text-center text-gray-800">
+      Configuración del usuario
+    </h1>
+
+    <!-- Cambiar nombre -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-700">Cambiar nombre</h2>
+      <div class="space-y-2">
+        <input
+          type="text"
+          placeholder="Nombre actual"
+          class="w-full px-4 py-2 rounded-md bg-gray-50 shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="text"
+          placeholder="Nuevo nombre"
+          class="w-full px-4 py-2 rounded-md bg-gray-50 shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <primary-button label="Actualizar" class="w-full" />
+      </div>
+    </section>
+
+    <!-- Cambiar contraseña -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-700">Cambiar contraseña</h2>
+      <div class="space-y-2">
+        <input
+          type="password"
+          placeholder="Contraseña actual"
+          class="w-full px-4 py-2 rounded-md bg-gray-50 shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="password"
+          placeholder="Nueva contraseña"
+          class="w-full px-4 py-2 rounded-md bg-gray-50 shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="password"
+          placeholder="Repetir nueva contraseña"
+          class="w-full px-4 py-2 rounded-md bg-gray-50 shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <primary-button label="Actualizar" class="w-full" />
+      </div>
+    </section>
+
+    <!-- Cambiar correo -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-700">Cambiar correo</h2>
+      <div class="space-y-2">
+        <input
+          type="email"
+          placeholder="Correo actual"
+          class="w-full px-4 py-2 rounded-md bg-gray-50 shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="email"
+          placeholder="Nuevo correo"
+          class="w-full px-4 py-2 rounded-md bg-gray-50 shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <primary-button label="Actualizar" class="w-full" />
+      </div>
+    </section>
+
+  </div>
 </div>

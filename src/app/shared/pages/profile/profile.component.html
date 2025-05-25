@@ -1,3 +1,20 @@
-<div>
-    <div>Perfil del usuario compratido</div>
+<div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6 space-y-6">
+  <!-- Título -->
+  <h1 class="text-2xl font-semibold text-center underline underline-offset-8">Perfil</h1>
+
+  <!-- Foto y nombre -->
+  <div class="flex flex-col items-center">
+    <img src="icons/perfil.png" alt="Foto de perfil" class="w-28 h-28 rounded-full mb-4 shadow-md" />
+    <h2 class="text-xl font-semibold text-gray-800">{{ user?.nombre }}</h2>
+  </div>
+
+  <!-- Información de cuenta -->
+  <div class="bg-gray-100 rounded-md p-4">
+    <h3 class="text-lg font-semibold mb-3 text-gray-700">Información de la cuenta</h3>
+    <ul class="space-y-2 text-gray-700">
+      <li><strong>Nombre:</strong> {{ user?.nombre }}</li>
+      <li><strong>Correo:</strong> {{ user?.email }}</li>
+      <li><strong>Permisos:</strong> {{ user?.rol }}</li>
+    </ul>
+  </div>
 </div>

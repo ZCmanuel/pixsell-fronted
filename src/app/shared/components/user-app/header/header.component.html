@@ -2,14 +2,14 @@
   class="flex justify-between items-center bg-white px-6 py-3 rounded-md shadow-lg h-[64px]"
 >
   <!-- Título actual -->
-  <div class="text-lg font-medium truncate max-w-[60%] text-[#333]">
+  <div class="text-xl font-bold truncate max-w-[60%] text-[#333]">
     <h2>{{ currentPath }}</h2>
   </div>
 
   <!-- Perfil de usuario -->
   <div class="flex items-center gap-3">
     <img
-      src="icons/usuario.png"
+      src="icons/perfil.png"
       alt="icono usuario"
       class="w-9 h-9 rounded-full object-cover cursor-pointer transition-transform duration-200 hover:scale-105"
       [routerLink]="'/' + basePath + '/perfil'"
@@ -17,7 +17,7 @@
     <secondary-link
       label="{{user()?.nombre}}"
       [routerLink]="'/' + basePath + '/perfil'"
-      class="text-sm font-medium text-[#4294FF] hover:text-[#2f79d1] transition-colors duration-200"
+      class="text-xl font-bold text-[#333] cursor-pointer transition-transform duration-200 hover:scale-105"
     />
   </div>
 </div>
