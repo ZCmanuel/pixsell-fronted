@@ -118,4 +118,54 @@ export class UsersService {
         })
       );
   }
+
+  updateUser(
+    id: number,
+    nombre?: string,
+    rol?: string,
+    contraseña?: string,
+    contraseña_confirmation?: string
+  ): Observable<UpdateMeResponse | { error: string }> {
+    const body: any = {};
+
+    // Solo incluir los campos que se proporcionen
+    if (nombre) {
+      body.nombre = nombre;
+    }
+    if (rol) {
+      body.rol = rol;
+    }
+    if (contraseña) {
+      body.contraseña = contraseña;
+    }
+    if (contraseña_confirmation) {
+      body.contraseña_confirmation = contraseña_confirmation;
+    }
+
+    console.log('Datos enviados al servidor:', body); // Debug para verificar los datos
+
+    return this.http
+      .put<UpdateMeResponse>(`${this.API_URL}/admin/users/${id}`, body)
+      .pipe(
+        tap((resp) => {
+          // Actualiza el cache del usuario
+          this.userCache.set(id.toString(), resp.user);
+        }),
+        catchError((error) => {
+          if (error.status === 422 && error.error.errors?.contraseña) {
+            console.error(
+              'Error de confirmación de contraseña:',
+              error.error.errors.contraseña
+            );
+            return of({
+              error: 'La confirmación de la contraseña no coincide.',
+            });
+          } else if (error.status === 403) {
+            return of({ error: 'La contraseña actual es incorrecta.' });
+          }
+
+          return of({ error: 'Ha ocurrido un error al actualizar el perfil.' });
+        })
+      );
+  }
 }
