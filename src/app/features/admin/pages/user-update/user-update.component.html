@@ -6,17 +6,20 @@
   >
     Actualizar Usuario
   </h2>
+  <div class="mb-6">
+    <app-message-error [message]="message_error" />
+    <app-message-success [message]="message_success" />
+  </div>
 
   <!-- ✅ Formulario: Actualizar nombre -->
   <form
     [formGroup]="formNombre"
-    (ngSubmit)="updateNombre()"
+    (ngSubmit)="updateName()"
     class="space-y-4 bg-gray-50 p-6 rounded-md border border-gray-200 shadow-sm"
   >
     <h3 class="text-lg font-semibold text-gray-700">Actualizar nombre</h3>
 
     <div>
-      
       <input
         id="nombre"
         formControlName="nombre"
@@ -37,7 +40,7 @@
         type="submit"
         class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
       >
-        Guardar nombre
+        Actualizar nombre
       </button>
     </div>
   </form>
@@ -51,7 +54,6 @@
     <h3 class="text-lg font-semibold text-gray-700">Actualizar contraseña</h3>
 
     <div>
-      
       <input
         id="contraseña"
         formControlName="contraseña"
@@ -69,7 +71,7 @@
         placeholder="Confirmar contraseña"
         class="w-full px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      @if (formPassword.errors) {
+      @if (formPassword.errors?.['passwordMismatch']) {
       <p class="text-red-500 text-sm mt-1">Las contraseñas no coinciden.</p>
       }
     </div>
@@ -79,7 +81,7 @@
         type="submit"
         class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
       >
-        Cambiar contraseña
+        Actualizar contraseña 
       </button>
     </div>
   </form>
@@ -97,7 +99,6 @@
         id="rol"
         formControlName="rol"
         class="w-full px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        
       >
         <option value="cliente">Cliente</option>
         <option value="fotógrafo">Fotógrafo</option>
@@ -109,7 +110,7 @@
         type="submit"
         class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
       >
-        Cambiar rol
+        Actualizar rol
       </button>
     </div>
   </form>
