@@ -2,10 +2,11 @@ import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { UsersService } from '../../../../core/services/Users.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-users',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './users.component.html',
 })
 export class UsersComponent {

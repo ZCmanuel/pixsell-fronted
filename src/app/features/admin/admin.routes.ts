@@ -19,13 +19,6 @@ const adminRoutes: Routes = [
         data: { icon: 'inicio', visible: true, order: 1 },
       },
       {
-        path: 'usuarios',
-        loadComponent: () =>
-          import('./pages/users/users.component').then((m) => m.UsersComponent),
-        title: 'Usuarios',
-        data: { icon: 'usuarios', visible: true, order: 2 },
-      },
-      {
         path: 'usuarios/:id',
         loadComponent: () =>
           import('./pages/users-details/users-details.component').then(
@@ -33,6 +26,13 @@ const adminRoutes: Routes = [
           ),
         title: 'Detalles usuario',
         data: { visible: false },
+      },
+      {
+        path: 'usuarios',
+        loadComponent: () =>
+          import('./pages/users/users.component').then((m) => m.UsersComponent),
+        title: 'Usuarios',
+        data: { icon: 'usuarios', visible: true, order: 2 },
       },
       {
         path: 'albums',

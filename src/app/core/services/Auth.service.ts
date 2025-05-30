@@ -46,14 +46,13 @@ export class AuthService {
   });
 
   login(user: Partial<UserClass>): Observable<boolean> {
-    return this.http.post<UserResponse>(`${this.API_URL}/login`, user).pipe(
-      map((resp) => this.handleAuthSuccess(resp)),
-      catchError((err) => this.handleAuthError(err))
-    );
+    return this.http
+      .post<UserResponse>(`${this.API_URL}/login`, user)
+      .pipe(map((resp) => this.handleAuthSuccess(resp)));
   }
 
   register(user: Partial<UserRegister>): Observable<any> {
-    return this.http.post(`${this.API_URL}/register`, user)
+    return this.http.post(`${this.API_URL}/register`, user);
   }
 
   checkStatus(): Observable<boolean> {
