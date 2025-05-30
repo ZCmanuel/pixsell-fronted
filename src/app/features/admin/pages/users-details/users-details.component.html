@@ -1,3 +1,4 @@
+<go-back/>
 <div
   class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8 mt-10"
   *ngIf="userResouerce.value() as user"
@@ -37,6 +38,15 @@
       <p class="font-semibold">Última actualización:</p>
       <p>{{ user.updated_at | date : "dd/MM/yyyy - HH:mm" }}</p>
     </div>
+  </div>
+
+  <div class="mt-6 flex justify-end">
+    <a
+      routerLink="/admin/usuarios/actualizar/{{ userId }}"
+      class="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200 shadow-md"
+    >
+      Actualizar perfil
+    </a>
   </div>
 </div>
 
