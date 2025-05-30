@@ -21,6 +21,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private user: Partial<UserClass> | null = null;
   errorMessage: string = '';
+  successMessage: string = '';
 
   // Validaciones del formulario de login
   loginForm = this.fb.group({
@@ -49,11 +50,13 @@ export class LoginComponent {
     // Llamada al servicio de login
     this.authService.login(this.user).subscribe({
       next: (resp) => {
+        this.successMessage = 'Inicio de sesión exitoso';
       },
       error: (err) => {
         console.error(err);
         if (err.status === 401) {
           this.errorMessage = 'Correo o contraseña incorrectos';
+          console.log('Error de autenticación:', err);
         } else if (err.status === 403) {
           this.errorMessage = 'Acceso denegado';
         } else {

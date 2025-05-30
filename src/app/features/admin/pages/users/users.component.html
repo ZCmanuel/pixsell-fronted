@@ -15,16 +15,10 @@
       <input
         type="text"
         placeholder="Buscar por nombre"
-        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-1/6 max-w-sm"
+        class="border border-[#4294FF] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2f79d1] w-1/6 max-w-sm"
         [value]="name()"
         (input)="name.set($any($event.target).value)"
       />
-      <button
-        type="submit"
-        class="bg-[#4294FF] text-white px-4 py-2 rounded-lg hover:bg-[#2f79d1] transition"
-      >
-        Buscar
-      </button>
     </form>
   </div>
 
@@ -64,7 +58,14 @@
       @if ((usersResource.value()?.users ?? []).length > 0) { @for (user of
       usersResource.value()?.users; track $index) {
       <tr class="hover:bg-gray-50 transition duration-200">
-        <td class="px-6 py-4 whitespace-nowrap">{{ user.nombre }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <a
+            [routerLink]="['/admin/usuarios', user.id_usuario]"
+            class="text-blue-600 font-medium hover:text-blue-800 hover:underline transition-colors duration-200"
+          >
+            {{ user.nombre }}
+          </a>
+        </td>
         <td class="px-6 py-4 whitespace-nowrap">{{ user.email }}</td>
         <td class="px-6 py-4 whitespace-nowrap capitalize">{{ user.rol }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-gray-600">
