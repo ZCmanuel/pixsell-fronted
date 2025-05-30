@@ -53,6 +53,15 @@ const adminRoutes: Routes = [
         data: { visible: false },
       },
       {
+        path: 'usuarios/actualizar/:id',
+        loadComponent: () =>
+          import('../admin/pages/user-update/user-update.component').then(
+            (m) => m.UserUpdateComponent
+          ),
+        title: 'Actualizar usuario',
+        data: { visible: false },
+      },
+      {
         path: 'perfil',
         loadComponent: () =>
           import('../../shared/pages/profile/profile.component').then(
