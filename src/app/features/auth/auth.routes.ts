@@ -1,18 +1,28 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { AuthLayoutComponent } from '../layouts/auth-layout/auth-layout.component';
 
-export const AUTH_ROUTES: Routes = [
+const authRoutes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-  {
-    path: '**',
-    redirectTo: 'login',
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: 'login',
+        loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
+        title: 'Iniciar sesión',
+      },
+      {
+        path: 'register',
+        loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent),
+        title: 'Registro',
+      },
+      {
+        path: '**',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+    ],
   },
 ];
+
+export default authRoutes;

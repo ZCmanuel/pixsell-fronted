@@ -1,0 +1,117 @@
+<go-back />
+
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md space-y-12">
+  <h2
+    class="text-2xl font-bold text-center text-gray-800 underline underline-offset-8"
+  >
+    Actualizar Usuario
+  </h2>
+  <div class="mb-6">
+    <app-message-error [message]="message_error" />
+    <app-message-success [message]="message_success" />
+  </div>
+
+  <!-- ✅ Formulario: Actualizar nombre -->
+  <form
+    [formGroup]="formNombre"
+    (ngSubmit)="updateName()"
+    class="space-y-4 bg-gray-50 p-6 rounded-md border border-gray-200 shadow-sm"
+  >
+    <h3 class="text-lg font-semibold text-gray-700">Actualizar nombre</h3>
+
+    <div>
+      <input
+        id="nombre"
+        formControlName="nombre"
+        type="text"
+        placeholder="Nuevo nombre"
+        class="w-full px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      @if (formNombre.get('nombre')?.invalid &&
+      formNombre.get('nombre')?.touched) {
+      <p class="text-red-500 text-sm mt-1">
+        El nombre debe tener al menos 3 caracteres.
+      </p>
+      }
+    </div>
+
+    <div class="text-right">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+      >
+        Actualizar nombre
+      </button>
+    </div>
+  </form>
+
+  <!-- ✅ Formulario: Cambiar contraseña -->
+  <form
+    [formGroup]="formPassword"
+    (ngSubmit)="updatePassword()"
+    class="space-y-4 bg-gray-50 p-6 rounded-md border border-gray-200 shadow-sm"
+  >
+    <h3 class="text-lg font-semibold text-gray-700">Actualizar contraseña</h3>
+
+    <div>
+      <input
+        id="contraseña"
+        formControlName="contraseña"
+        type="password"
+        placeholder="Nueva contraseña"
+        class="w-full px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <input
+        id="contraseña_confirmation"
+        formControlName="contraseña_confirmation"
+        type="password"
+        placeholder="Confirmar contraseña"
+        class="w-full px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      @if (formPassword.errors?.['passwordMismatch']) {
+      <p class="text-red-500 text-sm mt-1">Las contraseñas no coinciden.</p>
+      }
+    </div>
+
+    <div class="text-right">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+      >
+        Actualizar contraseña 
+      </button>
+    </div>
+  </form>
+
+  <!-- ✅ Formulario: Cambiar rol -->
+  <form
+    [formGroup]="formRol"
+    (ngSubmit)="updateRol()"
+    class="space-y-4 bg-gray-50 p-6 rounded-md border border-gray-200 shadow-sm"
+  >
+    <h3 class="text-lg font-semibold text-gray-700">Cambiar rol</h3>
+
+    <div>
+      <select
+        id="rol"
+        formControlName="rol"
+        class="w-full px-4 py-2 rounded-md bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="cliente">Cliente</option>
+        <option value="fotógrafo">Fotógrafo</option>
+      </select>
+    </div>
+
+    <div class="text-right">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+      >
+        Actualizar rol
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,1 +1,56 @@
-<p>users-details works!</p>,
+<go-back/>
+<div
+  class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8 mt-10"
+  *ngIf="userResouerce.value() as user"
+>
+  <!-- Encabezado -->
+  <div class="flex items-center gap-6 mb-6">
+    <img
+      src="/icons/perfil.png"
+      alt="Perfil"
+      class="w-24 h-24 rounded-full border-4 border-blue-500 shadow"
+    />
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">{{ user.nombre }}</h1>
+      <p class="text-gray-500">{{ user.email }}</p>
+    </div>
+  </div>
+
+  <!-- Información de cuenta -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
+    <div>
+      <p class="font-semibold">Nombre completo:</p>
+      <p>{{ user.nombre }}</p>
+    </div>
+    <div>
+      <p class="font-semibold">Correo electrónico:</p>
+      <p>{{ user.email }}</p>
+    </div>
+    <div>
+      <p class="font-semibold">Rol:</p>
+      <p class="capitalize">{{ user.rol }}</p>
+    </div>
+    <div>
+      <p class="font-semibold">Registrado desde:</p>
+      <p>{{ user.created_at | date : "dd/MM/yyyy - HH:mm" }}</p>
+    </div>
+    <div>
+      <p class="font-semibold">Última actualización:</p>
+      <p>{{ user.updated_at | date : "dd/MM/yyyy - HH:mm" }}</p>
+    </div>
+  </div>
+
+  <div class="mt-6 flex justify-end">
+    <a
+      routerLink="/admin/usuarios/actualizar/{{ userId }}"
+      class="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200 shadow-md"
+    >
+      Actualizar perfil
+    </a>
+  </div>
+</div>
+
+<!-- Mensaje de carga o error -->
+<div *ngIf="!userResouerce.value()" class="text-center mt-10 text-gray-600">
+  Cargando información del usuario...
+</div>

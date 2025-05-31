@@ -1,27 +1,24 @@
-import { Component, computed, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { ADMIN_ROUTES } from '../../../../features/admin/admin.routes';
-import { CLIENT_ROUTES } from '../../../../features/clients/clients.routes';
+import { Component, computed, inject, Input } from '@angular/core';
+import { Route, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../../core/services/Auth.service';
 
 @Component({
   selector: 'sidebar',
-  imports: [],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
-  private router = inject(Router);
+  // Rutas a mostrar en el sidebar
+  @Input() routes: Route[] = [];
+  // ruta actual /admin o /user
+  @Input() basePath: string = '';
 
-  // Definimos la ruta de admin
-  private isAdmin = computed(() => this.router.url.startsWith('/admin'));
+  private authService = inject(AuthService);
 
-  // Obtenemos las rutas visibles dinámicamente según contexto
-  readonly visibleRoutes = computed(() => {
-    const routes = this.router.url.startsWith('/admin') ? ADMIN_ROUTES : CLIENT_ROUTES
-    
-  });
-
-  logout() {
-    // Aquí puedes colocar tu lógica de logout
-    console.log('Cerrar sesión');
+  // Boton de cerrar sesión
+  logout(): void {
+    console.log('Logout');
+    this.authService.logout();
   }
 }

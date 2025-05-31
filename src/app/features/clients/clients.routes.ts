@@ -1,19 +1,19 @@
 import { Routes } from '@angular/router';
 import { UsersLayoutComponent } from '../layouts/users-layout/users-layout.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AlbumsComponent } from './pages/albums/albums.component';
-import { AlbumDetailsComponent } from './pages/album-details/album-details.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { IsAuthenticatedGuard } from '../../core/guards/is-autenticated.guard';
 
-export const CLIENT_ROUTES: Routes = [
+const clientRoutes: Routes = [
   {
     path: '',
+    canMatch: [IsAuthenticatedGuard],
     component: UsersLayoutComponent,
     children: [
       {
         path: 'inicio',
-        component: DashboardComponent,
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(
+            (c) => c.DashboardComponent
+          ),
         title: 'Inicio',
         data: {
           icon: 'inicio',
@@ -23,7 +23,10 @@ export const CLIENT_ROUTES: Routes = [
       },
       {
         path: 'albums',
-        component: AlbumsComponent,
+        loadComponent: () =>
+          import('./pages/albums/albums.component').then(
+            (c) => c.AlbumsComponent
+          ),
         title: 'Mis Álbumes',
         data: {
           icon: 'carpeta',
@@ -33,15 +36,21 @@ export const CLIENT_ROUTES: Routes = [
       },
       {
         path: 'albums/:id',
-        component: AlbumDetailsComponent,
-        title: 'Detalles album',
+        loadComponent: () =>
+          import('./pages/album-details/album-details.component').then(
+            (c) => c.AlbumDetailsComponent
+          ),
+        title: 'Detalles álbum',
         data: {
-          visible: false, // No aparece en menús
+          visible: false,
         },
       },
       {
         path: 'configuracion',
-        component: SettingsComponent,
+        loadComponent: () =>
+          import('../../shared/pages/settings/settings.component').then(
+            (m) => m.SettingsComponent
+          ),
         title: 'Configuración',
         data: {
           visible: false,
@@ -49,7 +58,10 @@ export const CLIENT_ROUTES: Routes = [
       },
       {
         path: 'perfil',
-        component: ProfileComponent,
+        loadComponent: () =>
+          import('../../shared/pages/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          ),
         title: 'Mi perfil',
         data: {
           visible: false,
@@ -58,7 +70,10 @@ export const CLIENT_ROUTES: Routes = [
       {
         path: '**',
         redirectTo: 'inicio',
+        pathMatch: 'full',
       },
     ],
   },
 ];
+
+export default clientRoutes;

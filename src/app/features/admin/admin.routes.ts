@@ -1,86 +1,84 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { UsersLayoutComponent } from '../layouts/users-layout/users-layout.component';
-import { UsersComponent } from './pages/users/users.component';
-import { UsersDetailsComponent } from './pages/users-details/users-details.component';
-import { AlbumsComponent } from '../clients/pages/albums/albums.component';
-import { AlbumDetailsComponent } from '../clients/pages/album-details/album-details.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
+import { IsAuthenticatedGuard } from '../../core/guards/is-autenticated.guard';
+import { IsAdminGuard } from '../../core/guards/is-admin.guard';
 
-export const ADMIN_ROUTES: Routes = [
+const adminRoutes: Routes = [
   {
     path: '',
-    component: UsersLayoutComponent,
+    canMatch: [IsAuthenticatedGuard, IsAdminGuard],
+    component: AdminLayoutComponent,
     children: [
       {
         path: 'inicio',
-        component: DashboardComponent,
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
         title: 'Inicio',
-        data: {
-          icon: 'inicio',
-          visible: true,
-          order: 1,
-        },
+        data: { icon: 'inicio', visible: true, order: 1 },
       },
-
-      {
-        path: 'usuarios',
-        component: UsersComponent,
-        title: 'Usuarios',
-        data: {
-          icon: 'usuarios',
-          visible: true,
-          order: 2,
-        },
-      },
-
       {
         path: 'usuarios/:id',
-        component: UsersDetailsComponent,
+        loadComponent: () =>
+          import('./pages/users-details/users-details.component').then(
+            (m) => m.UsersDetailsComponent
+          ),
         title: 'Detalles usuario',
-        data: {
-          visible: false, // No aparece en menús
-        },
+        data: { visible: false },
       },
-
+      {
+        path: 'usuarios',
+        loadComponent: () =>
+          import('./pages/users/users.component').then((m) => m.UsersComponent),
+        title: 'Usuarios',
+        data: { icon: 'usuarios', visible: true, order: 2 },
+      },
       {
         path: 'albums',
-        component: AlbumsComponent,
+        loadComponent: () =>
+          import('./pages/albums/albums.component').then(
+            (m) => m.AlbumsComponent
+          ),
         title: 'Álbumes',
-        data: {
-          icon: 'carpeta',
-          visible: true,
-          order: 3,
-        },
+        data: { icon: 'carpeta', visible: true, order: 3 },
       },
       {
         path: 'albums/:id',
-        component: AlbumDetailsComponent,
+        loadComponent: () =>
+          import('./pages/albums-details/albums-details.component').then(
+            (m) => m.AlbumsDetailsComponent
+          ),
         title: 'Detalles álbum',
-        data: {
-          visible: false, // No aparece en menús
-        },
+        data: { visible: false },
       },
-
+      {
+        path: 'usuarios/actualizar/:id',
+        loadComponent: () =>
+          import('../admin/pages/user-update/user-update.component').then(
+            (m) => m.UserUpdateComponent
+          ),
+        title: 'Actualizar usuario',
+        data: { visible: false },
+      },
       {
         path: 'perfil',
-        component: ProfileComponent,
+        loadComponent: () =>
+          import('../../shared/pages/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          ),
         title: 'Mi perfil',
-        data: {
-          visible: false,
-        },
+        data: { visible: false },
       },
-
       {
         path: 'configuracion',
-        component: SettingsComponent,
+        loadComponent: () =>
+          import('../../shared/pages/settings/settings.component').then(
+            (m) => m.SettingsComponent
+          ),
         title: 'Configuración',
-        data: {
-          visible: false,
-        },
+        data: { visible: false },
       },
-
       {
         path: '**',
         redirectTo: 'inicio',
@@ -88,3 +86,5 @@ export const ADMIN_ROUTES: Routes = [
     ],
   },
 ];
+
+export default adminRoutes;

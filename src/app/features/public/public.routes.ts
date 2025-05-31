@@ -5,7 +5,7 @@ import { GalleryComponent } from './pages/gallery/gallery.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AbautAsComponent } from './pages/abaut-as/abaut-as.component';
 
-export const PUBLIC_ROUTES: Routes = [
+export default [
   {
     path: '',
     component: PublicLayoutComponent,
@@ -40,4 +40,4 @@ export const PUBLIC_ROUTES: Routes = [
       },
     ],
   },
-];
+] as Routes;
