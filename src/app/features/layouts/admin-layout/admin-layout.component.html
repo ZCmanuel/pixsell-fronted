@@ -1,16 +1,16 @@
 <div class="relative h-screen overflow-hidden bg-[#f0f0f0]">
-  <!-- Sidebar fijo a la izquierda: 1/6 -->
-  <div class="fixed top-0 left-0 w-1/6 h-full z-30">
+  <!-- Sidebar fijo a la izquierda: 15% -->
+  <div class="fixed top-0 left-0 w-[15%] h-full z-30">
     <sidebar [routes]="routes" [basePath]="basePath" />
   </div>
 
-  <!-- Header fijo a la derecha del sidebar: 5/6 -->
-  <div class="fixed left-[16.6667%] w-[83.3333%] h-[72px] px-2 py-1 z-20">
+  <!-- Header fijo a la derecha del sidebar: 85% -->
+  <div class="fixed left-[15%] w-[85%] h-[72px] px-2 py-1 z-20">
     <head-component [basePath]="basePath" />
   </div>
 
-  <!-- Contenido principal: también 5/6 -->
-  <div class="absolute top-[72px] left-[16.6667%] w-[83.3333%] h-[calc(100%-72px)] overflow-y-auto p-4">
+  <!-- Contenido principal: también 85% -->
+  <div class="absolute top-[72px] left-[15%] w-[85%] h-[calc(100%-72px)] overflow-y-auto p-4">
     <main class="h-full">
       <router-outlet />
     </main>

@@ -2,7 +2,7 @@
   class="flex justify-between items-center bg-white px-6 py-3 rounded-md shadow-lg h-[64px]"
 >
   <!-- Título actual -->
-  <div class="text-xl font-bold truncate max-w-[60%] text-[#333]">
+  <div class="text-lg font-bold truncate max-w-[60%] text-[#333]">
     <h2>{{ currentPath }}</h2>
   </div>
 
@@ -17,7 +17,7 @@
     <secondary-link
       label="{{user()?.nombre}}"
       [routerLink]="'/' + basePath + '/perfil'"
-      class="text-xl font-bold text-[#333] cursor-pointer transition-transform duration-200 hover:scale-105"
+      class="text-lg font-bold text-[#333] cursor-pointer transition-transform duration-200 hover:scale-105"
     />
   </div>
 </div>
