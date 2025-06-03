@@ -1,1 +1,118 @@
-<p>albums works!</p>,
+<div class="overflow-x-auto rounded-lg mt-6 p-4 shadow-xl bg-white">
+  <!-- Encabezado -->
+  <div class="mb-4">
+    <h1 class="text-2xl font-semibold text-gray-800">Listado de álbumes</h1>
+    <p class="text-sm text-gray-500">Álbumes registrados en la plataforma</p>
+  </div>
+
+  <!-- Barra de búsqueda -->
+  <div class="mb-4">
+    <form
+      class="flex items-center gap-4"
+      role="search"
+      aria-label="Buscar álbum"
+    >
+      <!-- Campo de búsqueda por nombre -->
+      <input
+        type="text"
+        placeholder="Buscar por nombre"
+        class="border border-[#4294FF] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2f79d1] w-1/6 max-w-sm"
+        [value]="name()"
+        (input)="name.set($any($event.target).value)"
+      />
+
+      <!-- Campo de filtro por estado -->
+      <select
+        class="border border-[#4294FF] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2f79d1] w-1/6 max-w-sm"
+        [value]="estado()"
+        (change)="estado.set($any($event.target).value)"
+      >
+        <option value="">Todos los estados</option>
+        <option value="pendiente">Pendiente</option>
+        <option value="seleccionado">Seleccionado</option>
+        <option value="finalizado">Finalizado</option>
+      </select>
+
+    <a
+      routerLink="/admin/albums/nuevo"
+      class="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200 shadow-md"
+    >
+      Crear álbum
+    </a>
+    </form>
+  </div>
+
+  <table
+    class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow-md"
+  >
+    <thead class="bg-gray-100">
+      <tr>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+        >
+          Nombre
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+        >
+          Estado
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+        >
+          Usuario
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+        >
+          Fecha de creación
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+        >
+          Última actualización
+        </th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 text-sm text-gray-800">
+      @if ((albumResource.value()?.albums ?? []).length > 0) { @for (album of
+      albumResource.value()?.albums; track $index) {
+      <tr class="hover:bg-gray-50 transition duration-200">
+        <td class="px-6 py-4 whitespace-nowrap">
+          <a
+            [routerLink]="['/admin/albums', album.id_album]"
+            class="text-blue-600 font-medium hover:text-blue-800 hover:underline transition-colors duration-200"
+          >
+            {{ album.nombre }}
+          </a>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span
+            class="px-3 py-1 rounded-full text-xs font-semibold capitalize"
+            [ngClass]="{
+              'bg-red-100 text-red-800': album.estado === 'pendiente',
+              'bg-blue-100 text-blue-800': album.estado === 'seleccionado',
+              'bg-green-100 text-green-800': album.estado === 'finalizado'
+            }"
+          >
+            {{ album.estado }}
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ album.usuario.email }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+          {{ album.created_at | date : "dd/MM/yyyy - HH:mm" }}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+          {{ album.updated_at | date : "dd/MM/yyyy - HH:mm" }}
+        </td>
+      </tr>
+      } } @else {
+      <tr>
+        <td colspan="5" class="text-center px-6 py-4 text-gray-500 italic">
+          No hay álbumes disponibles.
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

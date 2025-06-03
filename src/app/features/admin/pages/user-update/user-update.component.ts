@@ -22,7 +22,7 @@ export class UserUpdateComponent {
   private fb = inject(FormBuilder);
   private activateRoute = inject(ActivatedRoute);
 
-  userId = this.activateRoute.snapshot.params['id'];
+  userId = this.activateRoute.snapshot.params['id']; 
 
   userResouerce = rxResource({
     request: () => ({

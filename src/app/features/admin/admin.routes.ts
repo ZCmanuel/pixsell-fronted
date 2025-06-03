@@ -44,6 +44,15 @@ const adminRoutes: Routes = [
         data: { icon: 'carpeta', visible: true, order: 3 },
       },
       {
+        path: 'albums/nuevo',
+        loadComponent: () =>
+          import('./pages/album-create/album-create.component').then(
+            (m) => m.AlbumCreateComponent
+          ),
+        title: 'Crear álbum',
+        data: { visible: false },
+      },
+      {
         path: 'albums/:id',
         loadComponent: () =>
           import('./pages/albums-details/albums-details.component').then(
