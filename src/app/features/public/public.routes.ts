@@ -16,6 +16,7 @@ export default [
         title: 'Inicio',
         data: { label: 'Inicio' },
       },
+      /** 
       {
         path: 'gallery',
         component: GalleryComponent,
@@ -27,7 +28,7 @@ export default [
         component: AbautAsComponent,
         title: 'Sobre nosotros',
         data: { label: 'Sobre nosotros' },
-      },
+      },*/
       {
         path: 'contact',
         component: ContactComponent,
