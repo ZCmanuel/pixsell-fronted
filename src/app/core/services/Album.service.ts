@@ -32,6 +32,7 @@ export class AlbumService {
 
   private http = inject(HttpClient);
   private albumsCache = new Map<string, AlbumsList>();
+  private AlbumCache = new Map<string, AlbumsById>();
 
   /**
    * Lista los álbumes de la API
@@ -66,10 +67,23 @@ export class AlbumService {
       );
   }
 
+  /**
+   * Obtiene un álbum por su ID
+   * @param id
+   * @returns Observable con el álbum
+   */
   getAlbumById(id: number): Observable<AlbumsById> {
     return this.http.get<AlbumsById>(`${this.API_URL}/admin/albums/${id}`).pipe(
       tap((resp) => {
-        console.log('Álbums obtenido:', resp);
+        this.AlbumCache.set(id.toString(), resp);
+      })
+    );
+  }
+
+  getUserAlbums(): Observable<AlbumsById> {
+    return this.http.get<AlbumsById>(`${this.API_URL}/user/albums`).pipe(
+      tap((resp) => {
+        this.AlbumCache.set('user-albums', resp);
       })
     );
   }
