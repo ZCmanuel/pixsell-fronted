@@ -1,1 +1,138 @@
-<p>dashboard works!</p>,
+<div class="max-w-7xl mx-auto p-6 space-y-10">
+  <!-- Título -->
+  <h1 class="text-3xl font-bold text-gray-800">Estadisticas PixSell</h1>
+
+  <!-- Estadísticas principales -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Total usuarios -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center gap-4">
+      <div class="bg-blue-100 text-blue-600 rounded-full p-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-1a4 4 0 100-8 4 4 0 000 8z"
+          />
+        </svg>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Usuarios registrados</p>
+        <p class="text-2xl font-bold text-gray-800">
+          {{ usersStads.value()?.total_usuarios || 0 }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Total álbumes -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center gap-4">
+      <div class="bg-green-100 text-green-600 rounded-full p-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4zm2 0h14v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7z"
+          />
+        </svg>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Álbumes creados</p>
+        <p class="text-2xl font-bold text-gray-800">
+          {{ albumsStads.value()?.total_albumes || 0 }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Álbumes finalizados -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center gap-4">
+      <div class="bg-green-100 text-green-600 rounded-full p-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Álbumes finalizados</p>
+        <p class="text-2xl font-bold text-gray-800">
+          {{ albumsStads.value()?.albumes_finalizados || 0 }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Crecimiento semanal de usuarios -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center gap-4">
+      <div class="bg-blue-100 text-blue-600 rounded-full p-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          />
+        </svg>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Crecimiento semanal de usuarios</p>
+        <p class="text-2xl font-bold text-gray-800">
+          {{ getUserGrowthPercent() }}%
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Gráfico de usuarios registrados por semana -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <h2 class="text-lg font-semibold text-gray-800">
+        Usuarios registrados por semana
+      </h2>
+      <canvas id="usersChart" class="mt-4"></canvas>
+    </div>
+
+    <!-- Gráfico circular de estados de los álbumes -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <h2 class="text-lg font-semibold text-gray-800">
+        Estados de los álbumes
+      </h2>
+      <canvas id="albumsPieChart" class="mt-4"></canvas>
+    </div>
+
+    <!-- Gráfico de álbumes creados por semana -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <h2 class="text-lg font-semibold text-gray-800">
+        Álbumes creados por semana
+      </h2>
+      <canvas id="albumsChart" class="mt-4">{{albumsStads.value()?.albumes_por_semana}}</canvas>
+    </div>
+  </div>
+</div>
