@@ -9,14 +9,7 @@
   </div>
 
   <!-- Mensaje de error -->
-  @if (errorMessage) {
-  <div
-    class="flex items-center gap-3 p-4 bg-red-100 border border-red-300 rounded-md text-red-700 w-[80%] mx-auto"
-  >
-    <img src="icons/error.png" alt="Error" class="w-6 h-6" />
-    <p class="text-sm font-medium">{{ errorMessage }}</p>
-  </div>
-  }
+  <app-message-error [message]="errorMessage" />
 
   <form
     class="w-full flex flex-col items-center gap-4 py-2"

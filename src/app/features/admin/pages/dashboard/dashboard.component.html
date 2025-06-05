@@ -5,55 +5,78 @@
   <!-- Estadísticas principales -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     <!-- Total usuarios -->
-    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center gap-4">
-      <div class="bg-blue-100 text-blue-600 rounded-full p-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-1a4 4 0 100-8 4 4 0 000 8z"
-          />
-        </svg>
+    <div
+      class="bg-white shadow-lg rounded-lg p-6 flex flex-col justify-between h-full transition hover:shadow-xl"
+    >
+      <div class="flex items-center gap-4">
+        <div class="bg-blue-100 text-blue-600 rounded-full p-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-1a4 4 0 100-8 4 4 0 000 8z"
+            />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Usuarios registrados</p>
+          <p class="text-3xl font-bold text-gray-800">
+            {{ usersStads.value()?.total_usuarios || 0 }}
+          </p>
+        </div>
       </div>
-      <div>
-        <p class="text-sm text-gray-500">Usuarios registrados</p>
-        <p class="text-2xl font-bold text-gray-800">
-          {{ usersStads.value()?.total_usuarios || 0 }}
-        </p>
-      </div>
+      <a
+        routerLink="/admin/usuarios"
+        class="mt-6 self-start bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition"
+      >
+        Ver usuarios
+      </a>
     </div>
 
     <!-- Total álbumes -->
-    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center gap-4">
-      <div class="bg-green-100 text-green-600 rounded-full p-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4zm2 0h14v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7z"
-          />
-        </svg>
+    <div
+      class="bg-white shadow-lg rounded-lg p-6 flex flex-col justify-between h-full transition hover:shadow-xl"
+    >
+      <!-- Encabezado -->
+      <div class="flex items-center gap-4">
+        <div class="bg-green-100 text-green-600 rounded-full p-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4zm2 0h14v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7z"
+            />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Álbumes creados</p>
+          <p class="text-3xl font-bold text-gray-800">
+            {{ albumsStads.value()?.total_albumes || 0 }}
+          </p>
+        </div>
       </div>
-      <div>
-        <p class="text-sm text-gray-500">Álbumes creados</p>
-        <p class="text-2xl font-bold text-gray-800">
-          {{ albumsStads.value()?.total_albumes || 0 }}
-        </p>
-      </div>
+
+      <!-- Enlace -->
+      <a
+        routerLink="/admin/albums"
+        class="mt-6 inline-block bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition self-start"
+      >
+        Ver álbumes
+      </a>
     </div>
 
     <!-- Álbumes finalizados -->
@@ -132,7 +155,9 @@
       <h2 class="text-lg font-semibold text-gray-800">
         Álbumes creados por semana
       </h2>
-      <canvas id="albumsChart" class="mt-4">{{albumsStads.value()?.albumes_por_semana}}</canvas>
+      <canvas id="albumsChart" class="mt-4">{{
+        albumsStads.value()?.albumes_por_semana
+      }}</canvas>
     </div>
   </div>
 </div>

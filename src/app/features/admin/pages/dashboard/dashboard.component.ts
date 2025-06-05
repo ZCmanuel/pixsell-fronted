@@ -2,10 +2,11 @@ import { Component, effect, inject } from '@angular/core';
 import { StadsService } from '../../../../core/services/Stads.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Chart } from 'chart.js/auto';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {

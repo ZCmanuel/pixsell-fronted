@@ -1,61 +1,5 @@
 <!-- Imagen de registro exitoso -->
 <div
-  *ngIf="showSuccess"
-  class="flex items-center justify-center gap-3 bg-green-100 border border-green-300 text-green-800 font-medium my-4 p-4 rounded-lg shadow-md transition duration-300 ease-in-out animate-fade-in"
->
-  <!-- Icono animado -->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="28"
-    height="28"
-    viewBox="0 0 24 24"
-  >
-    <mask id="lineMdCheckAll0">
-      <g
-        fill="none"
-        stroke="#fff"
-        stroke-dasharray="24"
-        stroke-dashoffset="24"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-      >
-        <path d="M2 13.5l4 4l10.75 -10.75">
-          <animate
-            fill="freeze"
-            attributeName="stroke-dashoffset"
-            dur="0.4s"
-            values="24;0"
-          />
-        </path>
-        <path stroke="#000" stroke-width="6" d="M7.5 13.5l4 4l10.75 -10.75">
-          <animate
-            fill="freeze"
-            attributeName="stroke-dashoffset"
-            begin="0.4s"
-            dur="0.4s"
-            values="24;0"
-          />
-        </path>
-        <path d="M7.5 13.5l4 4l10.75 -10.75">
-          <animate
-            fill="freeze"
-            attributeName="stroke-dashoffset"
-            begin="0.4s"
-            dur="0.4s"
-            values="24;0"
-          />
-        </path>
-      </g>
-    </mask>
-    <rect width="24" height="24" fill="#3fe160" mask="url(#lineMdCheckAll0)" />
-  </svg>
-
-  <!-- Mensaje -->
-  <span>Registro completado con éxito</span>
-</div>
-
-<div
   class="flex flex-col justify-center gap-6 bg-[#D1D0D0] p-10 shadow-xl rounded-md"
 >
   <!-- Logo -->
@@ -67,6 +11,9 @@
   <div class="font-semibold text-center text-2xl underline underline-offset-10">
     <h1>Registrarse</h1>
   </div>
+
+   <app-message-success [message]="successMessage" />
+   <app-message-error [message]="errorMessage" />
 
   <!-- Formulario -->
   <form
@@ -202,12 +149,5 @@
       </a>
     </div>
 
-    <!-- Error general -->
-    <div
-      *ngIf="errorMessage"
-      class="text-red-600 text-center text-sm p-4 bg-red-100 rounded-md"
-    >
-      <p>{{ errorMessage }}</p>
-    </div>
   </form>
 </div>

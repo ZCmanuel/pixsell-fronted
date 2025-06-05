@@ -1,1 +1,110 @@
-<p>dashboard works!</p>,
+<div class="max-w-7xl mx-auto p-6 space-y-10">
+  <!-- Encabezado -->
+  <div class="text-center">
+    <h1 class="text-4xl font-extrabold text-gray-800 mb-2">
+      Bienvenido a PixSell
+    </h1>
+    <p class="text-lg text-gray-500">
+      Gestiona tus álbumes y mantente conectado con tu fotógrafo.
+    </p>
+  </div>
+
+  <!-- Estadísticas -->
+  <!-- Estadísticas -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Total de álbumes -->
+    <div
+      class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between h-full transition hover:shadow-xl"
+    >
+      <div class="flex items-center gap-4">
+        <div class="bg-blue-100 text-blue-600 p-3 rounded-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4z"
+            />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Total de álbumes</p>
+          <p class="text-3xl font-bold text-gray-800">
+            {{ userStads.value()?.total_albumes || 0 }}
+          </p>
+        </div>
+      </div>
+      <a
+        routerLink="/user/albums"
+        class="mt-6 self-start bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition"
+      >
+        Ver usuarios
+      </a>
+    </div>
+
+    <!-- Álbumes pendientes -->
+    <div
+      class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between h-full transition hover:shadow-xl"
+    >
+      <div class="flex items-center gap-4">
+        <div class="bg-yellow-100 text-yellow-600 p-3 rounded-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 16l-4-4m0 0l4-4m-4 4h16"
+            />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Álbumes pendientes</p>
+          <p class="text-3xl font-bold text-gray-800">
+            {{ userStads.value()?.albumes_pendientes || 0 }}
+          </p>
+        </div>
+      </div>
+      <div></div>
+      <!-- Espaciador para igualar altura -->
+    </div>
+
+    <!-- Contacto del fotógrafo -->
+    <div
+      class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between h-full transition hover:shadow-xl"
+    >
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">
+          Contacto del fotógrafo
+        </h2>
+        <ul class="space-y-2 text-gray-600 text-sm">
+          <li>
+            <span class="font-medium text-gray-700"> Teléfono:</span> +34 123
+            456 789
+          </li>
+          <li>
+            <span class="font-medium text-gray-700"> Correo:</span>
+            {{ "soporte@pixsell.com<" }}/li>
+          </li>
+          <li>
+            <span class="font-medium text-gray-700">Horario:</span> Lunes a
+            Viernes - 09:00 a 18:00
+          </li>
+        </ul>
+      </div>
+      <div></div>
+      <!-- Espaciador -->
+    </div>
+  </div>
+</div>

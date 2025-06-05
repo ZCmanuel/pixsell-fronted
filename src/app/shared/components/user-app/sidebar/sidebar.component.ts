@@ -9,6 +9,7 @@ import { AuthService } from '../../../../core/services/Auth.service';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
+[x: string]: any;
   // Rutas a mostrar en el sidebar
   @Input() routes: Route[] = [];
   // ruta actual /admin o /user
@@ -22,3 +23,4 @@ export class SidebarComponent {
     this.authService.logout();
   }
 }
+ 

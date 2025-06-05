@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/services/Auth.service';
 import { UserClass } from '../../../../core/interfaces/user.interface';
 import { CommonModule } from '@angular/common';
+import { MessageErrorComponent } from "../../../../shared/components/Messages/message-error/message-error.component";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ import { CommonModule } from '@angular/common';
     RouterLink,
     CommonModule,
     ReactiveFormsModule,
-  ],
+    MessageErrorComponent
+],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
