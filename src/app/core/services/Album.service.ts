@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { AlbumsList } from '../interfaces/albums-list.interface';
+import { AlbumsById, AlbumsList } from '../interfaces/albums-list.interface';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { AlbumCreate } from '../interfaces/albums-create.interface';
 
@@ -64,6 +64,14 @@ export class AlbumService {
           this.albumsCache.set(key, resp);
         })
       );
+  }
+
+  getAlbumById(id: number): Observable<AlbumsById> {
+    return this.http.get<AlbumsById>(`${this.API_URL}/admin/albums/${id}`).pipe(
+      tap((resp) => {
+        console.log('Álbums obtenido:', resp);
+      })
+    );
   }
 
   /**
