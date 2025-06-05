@@ -1,23 +1,25 @@
-<go-back/>
+<go-back />
+
+<!-- Perfil de Usuario -->
 <div
-  class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8 mt-10"
+  class="max-w-5xl mx-auto bg-white shadow-lg rounded-xl p-10 mt-10 space-y-10"
   *ngIf="userResouerce.value() as user"
 >
   <!-- Encabezado -->
-  <div class="flex items-center gap-6 mb-6">
+  <div class="flex flex-col sm:flex-row items-center gap-6">
     <img
       src="/icons/perfil.png"
-      alt="Perfil"
+      alt="Foto de perfil"
       class="w-24 h-24 rounded-full border-4 border-blue-500 shadow"
     />
-    <div>
-      <h1 class="text-2xl font-bold text-gray-800">{{ user.nombre }}</h1>
+    <div class="text-center sm:text-left">
+      <h1 class="text-3xl font-bold text-gray-800">{{ user.nombre }}</h1>
       <p class="text-gray-500">{{ user.email }}</p>
     </div>
   </div>
 
-  <!-- Información de cuenta -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
+  <!-- Información del usuario -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-gray-700">
     <div>
       <p class="font-semibold">Nombre completo:</p>
       <p>{{ user.nombre }}</p>
@@ -31,7 +33,7 @@
       <p class="capitalize">{{ user.rol }}</p>
     </div>
     <div>
-      <p class="font-semibold">Registrado desde:</p>
+      <p class="font-semibold">Fecha de registro:</p>
       <p>{{ user.created_at | date : "dd/MM/yyyy - HH:mm" }}</p>
     </div>
     <div>
@@ -40,17 +42,80 @@
     </div>
   </div>
 
-  <div class="mt-6 flex justify-end">
+  <!-- Botón para editar -->
+  <div class="text-right">
     <a
-      routerLink="/admin/usuarios/actualizar/{{ userId }}"
-      class="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200 shadow-md"
+      [routerLink]="['/admin/usuarios/actualizar', userId]"
+      class="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200 shadow"
     >
       Actualizar perfil
     </a>
   </div>
 </div>
 
-<!-- Mensaje de carga o error -->
+<!-- Estado de carga -->
 <div *ngIf="!userResouerce.value()" class="text-center mt-10 text-gray-600">
   Cargando información del usuario...
+</div>
+
+<!-- Listado de Álbumes -->
+<div
+  class="max-w-5xl mx-auto overflow-x-auto mt-10 bg-white rounded-xl shadow-lg p-6"
+  *ngIf="(albumsResource.value()?.albums?.length ?? 0) > 0"
+>
+  <div class="mb-4">
+    <h2 class="text-2xl font-semibold text-gray-800">Álbumes del usuario</h2>
+    <p class="text-sm text-gray-500">Listado de álbumes asociados</p>
+  </div>
+
+  <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-800">
+    <thead class="bg-gray-100 text-gray-700 text-xs uppercase tracking-wide">
+      <tr>
+        <th class="px-6 py-3 text-left">Nombre</th>
+        <th class="px-6 py-3 text-left">Estado</th>
+        <th class="px-6 py-3 text-left">Creación</th>
+        <th class="px-6 py-3 text-left">Actualización</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      @for (album of albumsResource.value()?.albums; track $index) {
+      <tr class="hover:bg-gray-50 transition">
+        <td class="px-6 py-4">
+          <a
+            [routerLink]="['/admin/albums', album.id_album]"
+            class="text-blue-600 font-medium hover:text-blue-800 hover:underline transition"
+          >
+            {{ album.nombre }}
+          </a>
+        </td>
+        <td class="px-6 py-4">
+          <span
+            class="px-3 py-1 rounded-full text-xs font-semibold capitalize"
+            [ngClass]="{
+              'bg-red-100 text-red-800': album.estado === 'pendiente',
+              'bg-blue-100 text-blue-800': album.estado === 'seleccionado',
+              'bg-green-100 text-green-800': album.estado === 'finalizado'
+            }"
+          >
+            {{ album.estado }}
+          </span>
+        </td>
+        <td class="px-6 py-4 text-gray-600">
+          {{ album.created_at | date : "dd/MM/yyyy - HH:mm" }}
+        </td>
+        <td class="px-6 py-4 text-gray-600">
+          {{ album.updated_at | date : "dd/MM/yyyy - HH:mm" }}
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- Sin álbumes -->
+<div
+  *ngIf="(albumsResource.value()?.albums?.length ?? 0) === 0"
+  class="text-center text-gray-500 mt-10 italic"
+>
+  Este usuario no tiene álbumes registrados.
 </div>

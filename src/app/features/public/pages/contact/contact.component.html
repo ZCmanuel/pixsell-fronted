@@ -1,1 +1,89 @@
-<p>contact works!</p>,
+<section class="max-w-5xl mx-auto mt-12 mb-10 px-4">
+  <!-- Título -->
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-gray-800">Contáctanos</h2>
+    <p class="text-gray-600 mt-2 text-sm">
+      Estamos encantados de ayudarte. Completa el formulario o encuéntranos en
+      nuestra ubicación.
+    </p>
+  </div>
+
+  <!-- Contenido: Formulario + Mapa -->
+  <div class="grid md:grid-cols-2 gap-10">
+    <!-- Formulario de contacto -->
+    <form class="space-y-6 bg-white p-6 shadow-md rounded-md">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700"
+          >Nombre</label
+        >
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Tu nombre"
+          class="mt-1 w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700"
+          >Correo electrónico</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="tucorreo@ejemplo.com"
+          class="mt-1 w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700"
+          >Mensaje</label
+        >
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="Escribe tu mensaje..."
+          class="mt-1 w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-[#2C3E50] text-white font-semibold px-6 py-2 rounded-md hover:bg-[#2C3E50] transition"
+      >
+        Enviar mensaje
+      </button>
+    </form>
+
+    <!-- Mapa y datos de contacto -->
+    <div class="space-y-6">
+      <!-- Mapa -->
+      <div class="rounded-lg overflow-hidden shadow-md">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3096.899869967921!2d-3.931996924027007!3d38.9895686717205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6bc3698a88fd4d%3A0x98a473cd5202444d!2sC.%20de%20Toledo%2C%2026%2C%2013003%20Ciudad%20Real!5e0!3m2!1ses!2ses!4v1717413056123!5m2!1ses!2ses"
+          width="100%"
+          height="300"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
+      <!-- Datos de contacto -->
+      <div class="bg-gray-100 rounded-md p-4 text-sm text-gray-700">
+        <p><strong>Dirección:</strong> Calle Toledo, 26, Ciudad Real</p>
+        <p><strong>Email:</strong> {{ "contacto@pixsell.com" }}</p>
+        <p><strong>Teléfono:</strong> +34 123 456 789</p>
+        <p><strong>Horario:</strong> Lunes a Viernes, 09:00 - 18:00</p>
+      </div>
+    </div>
+  </div>
+</section>

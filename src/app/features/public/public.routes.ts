@@ -14,25 +14,25 @@ export default [
         path: 'home',
         component: HomeComponent,
         title: 'Inicio',
-        data: { label: 'Inicio' }
+        data: { label: 'Inicio' },
       },
       {
         path: 'gallery',
         component: GalleryComponent,
         title: 'Galería',
-        data: { label: 'Galeria' }
+        data: { label: 'Galeria' },
       },
       {
         path: 'about',
         component: AbautAsComponent,
         title: 'Sobre nosotros',
-        data: { label: 'Sobre nosotros' }
+        data: { label: 'Sobre nosotros' },
       },
       {
         path: 'contact',
         component: ContactComponent,
         title: 'Contacto',
-        data: { label: 'Contacto' }
+        data: { label: 'Contacto' },
       },
       {
         path: '**',

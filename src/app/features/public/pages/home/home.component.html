@@ -1,1 +1,142 @@
-<p>home works!</p>,
+<!-- LANDING PAGE DE PIXSELL -->
+<main class="font-poppins">
+  <!-- HERO SECTION -->
+  <section
+    class="flex flex-col-reverse lg:flex-row items-center justify-between px-10 lg:px-28 py-20 bg-white"
+  >
+    <!-- Texto -->
+    <div class="lg:w-1/2 text-center lg:text-left space-y-6">
+      <h1 class="text-4xl lg:text-5xl font-bold text-gray-800">
+        Capturamos momentos. Creamos historias.
+      </h1>
+      <p class="text-gray-600 text-lg">
+        En <strong>PixSell</strong> ofrecemos servicios fotográficos de alta
+        calidad para bodas, eventos y más.
+      </p>
+      <primary-link label="Contactanos" routerLink="/contact" />
+    </div>
+
+    <!-- Imagen Hero -->
+    <div class="lg:w-1/2 mb-10 lg:mb-0">
+      <img
+        src="img/hero.png"
+        alt="Cámara profesional en manos de un fotógrafo"
+        class="w-full h-auto rounded-lg shadow-lg"
+      />
+    </div>
+  </section>
+
+  <!-- QUIÉNES SOMOS -->
+  <section class="bg-gray-50 py-20 px-10 lg:px-28 text-center space-y-12">
+    <h2 class="text-3xl font-bold text-gray-800">
+      Fotógrafos profesionales en Ciudad Real: ¿Quiénes somos?
+    </h2>
+    <p class="max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">
+      En <strong>PixSell</strong> somos un equipo de
+      <strong>fotógrafos profesionales en Ciudad Real</strong> con más de 10
+      años de experiencia capturando
+      <strong>momentos únicos e irrepetibles</strong>. Nos especializamos en
+      <strong>fotografía de bodas, retratos, eventos corporativos</strong> y
+      <strong>sesiones personalizadas</strong>, adaptándonos a cada historia con
+      sensibilidad y creatividad.
+    </p>
+    <p class="max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">
+      Nuestra misión es transformar emociones en imágenes que perduren en el
+      tiempo. Apostamos por un trato cercano, un estilo auténtico y la máxima
+      calidad en cada proyecto.
+      <strong
+        >Si buscas un fotógrafo en Ciudad Real que entienda tu visión, estás en
+        el lugar correcto.</strong
+      >
+    </p>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="py-20 px-10 lg:px-28 bg-white">
+    <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">
+      Servicios que ofrecemos
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div class="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+        <h3 class="text-xl font-semibold text-[#2C3E50] mb-2">
+          Fotografía de bodas
+        </h3>
+        <p class="text-gray-600">
+          Capturamos cada instante especial de tu gran día con elegancia y
+          emoción.
+        </p>
+      </div>
+      <div class="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+        <h3 class="text-xl font-semibold text-[#2C3E50] mb-2">
+          Sesiones personales
+        </h3>
+        <p class="text-gray-600">
+          Sesiones profesionales para retratos, familia o contenido personal de
+          alta calidad.
+        </p>
+      </div>
+      <div class="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+        <h3 class="text-xl font-semibold text-[#2C3E50] mb-2">
+          Eventos y empresas
+        </h3>
+        <p class="text-gray-600">
+          Cobertura fotográfica para eventos corporativos, lanzamientos y
+          celebraciones.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="bg-gray-50 py-20 px-10 lg:px-28">
+    <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">
+      Testimonios de nuestros clientes
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <!-- Testimonio 1 -->
+      <div class="bg-white p-6 rounded-lg shadow text-center space-y-4">
+        <img
+          src="img/novios.png"
+          alt="Laura & Javier"
+          class="w-16 h-16 mx-auto rounded-full object-cover"
+        />
+        <div class="text-yellow-400 text-lg">★★★★★</div>
+        <p class="italic text-gray-600">
+          "¡Increíble trabajo! Las fotos de nuestra boda fueron mágicas. Gracias
+          PixSell por inmortalizar ese día."
+        </p>
+        <h4 class="font-semibold text-gray-800">Laura & Javier</h4>
+      </div>
+
+      <!-- Testimonio 2 -->
+      <div class="bg-white p-6 rounded-lg shadow text-center space-y-4">
+        <img
+          src="img/carlos.png"
+          alt="Carlos Muñoz"
+          class="w-16 h-16 mx-auto rounded-full object-cover"
+        />
+        <div class="text-yellow-400 text-lg">★★★★★</div>
+        <p class="italic text-gray-600">
+          "Profesionales, puntuales y con gran talento. Repetiremos sin duda
+          para futuros eventos."
+        </p>
+        <h4 class="font-semibold text-gray-800">Carlos Muñoz</h4>
+      </div>
+
+      <!-- Testimonio 3 -->
+      <div class="bg-white p-6 rounded-lg shadow text-center space-y-4">
+        <img
+          src="img/Ana.png"
+          alt="Ana Fernández"
+          class="w-16 h-16 mx-auto rounded-full object-cover"
+        />
+        <div class="text-yellow-400 text-lg">★★★★★</div>
+        <p class="italic text-gray-600">
+          "Mi sesión personal fue increíble. Me sentí cómoda y las fotos
+          superaron mis expectativas."
+        </p>
+        <h4 class="font-semibold text-gray-800">Ana Fernández</h4>
+      </div>
+    </div>
+  </section>
+</main>
