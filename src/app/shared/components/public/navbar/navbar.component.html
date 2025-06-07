@@ -1,29 +1,37 @@
-<div class="flex items-center justify-between px-[30px] py-[20px] w-full bg-transparent relative shadow">
+<div
+  class="flex items-center justify-between px-[30px] py-[20px] w-full bg-transparent relative shadow"
+>
   <!-- Logo -->
-  <div class="w-[20%] flex justify-center">
-    <img src="img/logo.png" routerLink="home" alt="Logo" class="h-auto w-full object-contain" />
+  <div class=" flex justify-center">
+    <img
+      src="img/logo.png"
+      routerLink="home"
+      alt="Logo"
+      class="h-auto w-full object-contain max-w-[150px] md:w-[150px] lg:w-[200px] xl:w-[250px] 2xl:w-[300px]"
+    />
   </div>
 
   <!-- Enlaces de navegación -->
-  <div class="flex-grow">
+  <div class="flex-grow hidden md:block">
+    <!-- Oculto en pantallas menores a 850px -->
     <ul class="flex justify-center items-center gap-[45px] list-none">
       @for (route of navRoutes; track route.path) {
-        <li class="font-poppins font-bold">
-          <a
-            [routerLink]="route.path"
-            routerLinkActive="bg-[#898787] text-white py-2 px-5 rounded-full"
-            class="text-black no-underline "
-          >
-            {{ route.title }} 
-          </a>
-        </li>
+      <li class="font-poppins font-bold">
+        <a
+          [routerLink]="route.path"
+          routerLinkActive="bg-[#898787] text-white py-2 px-5 rounded-full"
+          class="text-black no-underline"
+        >
+          {{ route.title }}
+        </a>
+      </li>
       }
     </ul>
   </div>
 
   <!-- Botones de login/registro -->
   <div class="flex items-center gap-[20px] w-[20%] justify-center">
-    <secondary-link label="Iniciar Sesión" routerLink="auth/login"/>
+    <secondary-link label="Iniciar Sesión" routerLink="auth/login" />
     <primary-link label="Registrase" routerLink="auth/register" />
   </div>
 </div>
