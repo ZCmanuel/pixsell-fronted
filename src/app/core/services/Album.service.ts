@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { AlbumsById, AlbumsList } from '../interfaces/albums-list.interface';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { AlbumCreate } from '../interfaces/albums-create.interface';
+import { AlbumDetails } from '../interfaces/album-details.interface';
 
 interface Options {
   estado?: string;
@@ -23,6 +24,13 @@ export interface CreateAlbum {
   fotos: File[];
 }
 
+/**
+ * Interfaz para seleccionar imágenes de un álbum
+ */
+export interface SelectImages {
+  imagenes: number[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,6 +41,7 @@ export class AlbumService {
   private http = inject(HttpClient);
   private albumsCache = new Map<string, AlbumsList>();
   private AlbumCache = new Map<string, AlbumsById>();
+  private AlbumByIdCache = new Map<string, AlbumDetails>();
 
   /**
    * Lista los álbumes de la API
@@ -68,7 +77,7 @@ export class AlbumService {
   }
 
   /**
-   * Obtiene un álbum por su ID
+   * Obtiene los albumes de un usuario por ID
    * @param id
    * @returns Observable con el álbum
    */
@@ -80,6 +89,10 @@ export class AlbumService {
     );
   }
 
+  /**
+   * Obtiene los álbumes del usuario logueado
+   * @returns
+   */
   getUserAlbums(): Observable<AlbumsById> {
     return this.http.get<AlbumsById>(`${this.API_URL}/user/albums`).pipe(
       tap((resp) => {
@@ -149,5 +162,56 @@ export class AlbumService {
           return throwError(() => error);
         })
       );
+  }
+
+  /**
+   * Obtiene los detalles de un álbum por ID
+   * @param id ID del álbum
+   * @returns Observable con los detalles del álbum
+   */
+  getAlbumDetails(id: number): Observable<AlbumDetails> {
+    return this.http.get<AlbumDetails>(`${this.API_URL}/album/${id}`).pipe(
+      tap((resp) => {
+        this.AlbumByIdCache.set(id.toString(), resp);
+      })
+    );
+  }
+
+  /**
+   * Selecciona imágenes de un álbum
+   * @param id
+   * @param data
+   * @returns
+   */
+  selectImages(id: number, data: SelectImages) {
+    // Validaciones antes de enviar los datos
+    if (!data.imagenes || data.imagenes.length === 0) {
+      return throwError(
+        () => new Error('Debes seleccionar al menos una imagen.')
+      );
+    }
+
+    // Enviar la solicitud al backend
+    return this.http
+      .post(`${this.API_URL}/albums/seleccion/${id}`, data)
+      .pipe(tap((resp) => console.log('Imágenes seleccionadas exitosamente')));
+  }
+
+
+  /**
+   * 
+   * @param id 
+   * @returns 
+   */
+  finaliceAlbum(id: number): Observable<any> {
+    // Validación del ID del álbum
+    if (!id || id <= 0) {
+      return throwError(() => new Error('ID de álbum inválido.'));
+    }
+
+    // Enviar la solicitud al backend para finalizar el álbum
+    return this.http
+      .patch(`${this.API_URL}/albums/finalice/${id}`, {})
+      .pipe(tap((resp) => console.log('Álbum finalizado exitosamente')));
   }
 }

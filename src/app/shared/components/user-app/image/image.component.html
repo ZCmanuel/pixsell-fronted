@@ -1,0 +1,53 @@
+<!-- Contenedor principal -->
+<div class="flex flex-col items-center gap-2 w-full">
+  <!-- Imagen con acción de ampliar -->
+  <div
+    class="relative w-full overflow-hidden rounded-xl shadow-sm hover:shadow-md transition cursor-pointer"
+    (click)="toggleModal()"
+  >
+    <img
+      [src]="src"
+      alt="Imagen"
+      class="w-full h-48 object-cover rounded-xl transition-transform duration-300 hover:scale-105"
+    />
+  </div>
+
+  <!-- Área de selección -->
+  <div class="flex flex-col items-center">
+    <input
+      type="checkbox"
+      [value]="id"
+      [checked]="isSelected"
+      [disabled]="disabled"
+      (change)="onCheckboxChange()"
+      class="w-5 h-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+    />
+    <span class="text-xs text-gray-600 mt-1">
+      {{ isSelected ? 'Seleccionada' : 'No seleccionada' }}
+    </span>
+  </div>
+</div>
+
+<!-- Modal de imagen ampliada -->
+<div
+  *ngIf="showModal"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-transparent bg-opacity-80"
+  (click)="toggleModal()"
+>
+  <div
+    class="relative bg-white rounded-xl shadow-xl p-4"
+    (click)="$event.stopPropagation()"
+  >
+    <img
+      [src]="src"
+      alt="Imagen ampliada"
+      class="max-h-[80vh] max-w-[90vw] object-contain rounded"
+    />
+    <button
+      class="absolute top-2 right-2 bg-white hover:bg-gray-100 text-gray-800 rounded-full p-2 shadow"
+      (click)="toggleModal()"
+    >
+      ✕
+    </button>
+  </div>
+</div>

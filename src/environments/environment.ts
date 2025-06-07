@@ -2,5 +2,6 @@
 // src/environments/environment.ts
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost/api'
+  apiUrl: 'https://pixsell-backend-production.up.railway.app/api', // Cambia por tu dominio real
+  // apiUrl: 'http://localhost/api', // Cambia por tu dominio real
 };
