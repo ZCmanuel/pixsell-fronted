@@ -96,9 +96,9 @@ export class DashboardComponent {
           {
             data: data.map((item) => item.total),
             backgroundColor: [
+              '#bbf7d0',
               'rgba(239, 68, 68, 0.7)',
               '#bfdbfe',
-              '#bbf7d0',
               '#FBBF24',
             ],
           },
