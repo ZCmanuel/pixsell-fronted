@@ -4,3 +4,4 @@ export const environment = {
   production: false,
   apiUrl: 'https://pixsell-backend-production.up.railway.app/api' // Cambia por tu dominio real
 };
+
