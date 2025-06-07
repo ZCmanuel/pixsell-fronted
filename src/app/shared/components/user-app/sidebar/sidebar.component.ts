@@ -1,11 +1,12 @@
-import { Component, computed, inject, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Route, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../../core/services/Auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'sidebar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
@@ -22,5 +23,9 @@ export class SidebarComponent {
     console.log('Logout');
     this.authService.logout();
   }
+
+  isSmallScreen(): boolean {
+  return window.innerWidth < 1180;
+}
 }
  
