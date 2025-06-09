@@ -1,8 +1,9 @@
-<div class="flex flex-col justify-between w-full p-4 bg-[#D1D0D0] shadow-xl h-screen">
-  <!-- Primer bloque (Logo + navegación) -->
+<div
+  class="flex flex-col justify-between w-full p-4 bg-[#D1D0D0] shadow-xl h-screen min-w-[60px]"
+>
+  <!-- LOGO -->
   <div>
-    <!-- Logo -->
-    <div class="mb-4 pb-4">
+    <div class="mb-6 pb-2">
       <a [routerLink]="['/' + basePath + '/inicio']" class="block">
         <img
           [src]="isSmallScreen() ? 'lente.png' : 'img/logo.png'"
@@ -13,58 +14,67 @@
       </a>
     </div>
 
-    <!-- Navegación -->
+    <!-- NAVIGATION -->
     <nav class="flex flex-col gap-2">
       @for (route of routes; track route.path) {
-        <div
-          class="flex items-center gap-3 p-4 rounded-md transition-colors duration-200 hover:bg-[#f0f0f0] group"
-          [routerLink]="route.path"
-          routerLinkActive="bg-[#f0f0f0]"
+      <a
+        [routerLink]="route.path"
+        routerLinkActive="bg-[#f0f0f0]"
+        class="flex items-center p-3 rounded-md transition-colors duration-200 hover:bg-[#f0f0f0] group xl:justify-start justify-center"
+      >
+        <!-- Ícono -->
+        <img
+          src="icons/{{ route.data?.['icon'] }}.png"
+          alt="icono"
+          class="w-5 h-5 min-w-[20px] aspect-square object-contain"
+        />
+
+        <!-- Título -->
+        <span
+          class="text-sm font-bold text-[#333] group-hover:text-[#000] transition-colors duration-200 hidden xl:inline ml-3"
         >
-          <!-- Ícono -->
-          <img
-            src="icons/{{ route.data?.['icon'] }}.png"
-            alt="icono"
-            class="w-5 h-5"
-          />
-          <!-- Título (oculto si < 1180px) -->
-          <span
-            class="text-sm font-bold text-[#333] group-hover:text-[#000] transition-colors duration-200 max-[1180px]:hidden"
-          >
-            {{ route.title }}
-          </span>
-        </div>
+          {{ route.title }}
+        </span>
+      </a>
       }
     </nav>
   </div>
 
-  <!-- Segundo bloque (configuración y logout) -->
-  <div class="flex flex-col gap-2 border-t border-[#bbb] pt-4 mt-4">
+  <!-- CONFIGURACIÓN Y LOGOUT -->
+  <div class="flex flex-col gap-2 border-t border-[#bbb] pt-4 mt-6">
     <!-- Configuración -->
-    <div
-      class="flex items-center gap-3 p-3 hover:bg-blue-200 rounded-md transition-colors duration-200 group"
+    <a
       [routerLink]="['/' + basePath + '/configuracion']"
       routerLinkActive="bg-[#d9ecff]"
+      class="flex items-center p-3 rounded-md transition-colors duration-200 hover:bg-blue-200 group xl:justify-start justify-center"
     >
-      <img src="icons/configuracion.png" alt="config" class="w-5 h-5" />
+      <img
+        src="icons/configuracion.png"
+        alt="config"
+        class="w-5 h-5 min-w-[20px] aspect-square object-contain"
+      />
       <span
-        class="text-sm font-semibold text-[#4294FF] group-hover:text-[#2f79d1] max-[1180px]:hidden"
+        class="text-sm font-semibold text-[#4294FF] group-hover:text-[#2f79d1] hidden xl:inline ml-3"
       >
         Configuración
       </span>
-    </div>
+    </a>
 
     <!-- Logout -->
-    <div
-      class="flex items-center gap-3 p-3 bg-red-100 hover:bg-red-200 rounded-md transition-colors duration-200 group"
+    <button
       (click)="logout()"
+      class="flex items-center p-3 bg-red-100 hover:bg-red-200 rounded-md transition-colors duration-200 group xl:justify-start justify-center w-full text-left"
     >
-      <img src="icons/logout.png" alt="logout" class="w-5 h-5" />
+      <img
+        src="icons/logout.png"
+        alt="logout"
+        class="w-5 h-5 min-w-[20px] aspect-square object-contain"
+      />
       <span
-        class="text-sm font-semibold text-red-500 group-hover:text-red-600 max-[1180px]:hidden"
+        class="text-sm font-semibold text-red-500 group-hover:text-red-600 hidden xl:inline ml-3"
       >
         Cerrar sesión
       </span>
-    </div>
+    </button>
   </div>
 </div>
