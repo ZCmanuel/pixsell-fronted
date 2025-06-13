@@ -1,7 +1,9 @@
 <go-back />
-
+<div>
+  <app-message-success [message]="success_message" />
+  <app-message-error [message]="error_message" />
+</div>
 <div class="overflow-x-auto rounded-2xl mt-8 p-6 shadow-xl bg-white space-y-8">
-
   <!-- Encabezado del álbum -->
   <div class="space-y-4">
     <h1 class="text-3xl font-bold text-gray-900">
@@ -14,9 +16,12 @@
         <span
           class="px-3 py-1 rounded-full text-xs font-semibold capitalize"
           [ngClass]="{
-            'bg-red-100 text-red-700': albumDetailsResource.value()?.estado === 'pendiente',
-            'bg-blue-100 text-blue-700': albumDetailsResource.value()?.estado === 'seleccionado',
-            'bg-green-100 text-green-700': albumDetailsResource.value()?.estado === 'finalizado'
+            'bg-red-100 text-red-700':
+              albumDetailsResource.value()?.estado === 'pendiente',
+            'bg-blue-100 text-blue-700':
+              albumDetailsResource.value()?.estado === 'seleccionado',
+            'bg-green-100 text-green-700':
+              albumDetailsResource.value()?.estado === 'finalizado'
           }"
         >
           {{ albumDetailsResource.value()?.estado }}
@@ -26,11 +31,17 @@
       <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
         <span>
           <strong>Creado:</strong>
-          {{ albumDetailsResource.value()?.created_at | date: "dd/MM/yyyy - HH:mm" }}
+          {{
+            albumDetailsResource.value()?.created_at
+              | date : "dd/MM/yyyy - HH:mm"
+          }}
         </span>
         <span>
           <strong>Actualizado:</strong>
-          {{ albumDetailsResource.value()?.updated_at | date: "dd/MM/yyyy - HH:mm" }}
+          {{
+            albumDetailsResource.value()?.updated_at
+              | date : "dd/MM/yyyy - HH:mm"
+          }}
         </span>
       </div>
     </div>
@@ -49,7 +60,10 @@
     <h2 class="text-xl font-semibold text-gray-900">Fotos</h2>
 
     <div
-      *ngIf="(albumDetailsResource.value()?.imagenes?.length ?? 0) > 0; else sinFotos"
+      *ngIf="
+        (albumDetailsResource.value()?.imagenes?.length ?? 0) > 0;
+        else sinFotos
+      "
       class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
     >
       <app-image
@@ -78,10 +92,5 @@
     >
       Finalizar álbum
     </button>
-    <div>
-      <app-message-success [message]="success_message"/>
-      <app-message-error [message]="error_message"/>
-    </div>
   </div>
-
 </div>
